@@ -7,8 +7,8 @@
  */
 
 export const siteConfig = {
-  /* ── Base Path ── */
-  basePath: "/portfolio",
+  /* ── Base Path (empty on Vercel, "/portfolio" on GitHub Pages) ── */
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
 
   /* ── Metadata ── */
   name: "柚子",
