@@ -78,7 +78,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         transition={{ duration: 0.5, delay: 0.15 + index * 0.1, ease: "easeOut" }}
       >
         {/* Status + Project number */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-5">
         <span
           className={cn(
             "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium",
@@ -102,8 +102,16 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         )}
       </div>
 
-      {/* Icon */}
-      <span className="text-2xl mb-3 block">{project.coverIcon}</span>
+      {/* Icon + Project name — prominent identity */}
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-3xl shrink-0">{project.coverIcon}</span>
+        <h3 className="text-xl md:text-2xl font-semibold text-text-primary group-hover:text-brand-light transition-colors leading-tight">
+          {project.name}
+          <span className="ml-2 text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity text-lg">
+            →
+          </span>
+        </h3>
+      </div>
 
       {/* Conflict — the hook */}
       <p className="text-sm text-text-secondary leading-relaxed mb-2">
@@ -116,14 +124,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         <span className="text-text-primary font-medium">我的回应：</span>
         {project.motivation}
       </p>
-
-      {/* Project name */}
-      <h3 className="text-base font-semibold text-text-primary mb-2 group-hover:text-brand-light transition-colors">
-        {project.name}
-        <span className="ml-2 text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity">
-          →
-        </span>
-      </h3>
 
       {/* Role */}
       <p className="text-xs text-text-tertiary mb-3">{project.role}</p>
