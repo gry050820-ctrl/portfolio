@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
+import { getPath } from "@/lib/utils";
 
 /**
  * Fixed top bar for project detail pages.
@@ -18,7 +19,7 @@ export function ProjectDetailNav() {
       <Container>
         <nav className="flex items-center h-14 md:h-16">
           <a
-            href="/#lab"
+            href={getPath("/#lab")}
             className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary transition-colors"
           >
             <span className="text-brand-light">&larr;</span>

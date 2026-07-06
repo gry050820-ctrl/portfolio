@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Container } from "@/components/ui/Container";
+import { getPath } from "@/lib/utils";
 
 interface CrossLink {
   label: string;
@@ -49,7 +50,7 @@ export function ProjectCrossLinks({
                 {byCapability.map((link) => (
                   <li key={link.slug}>
                     <a
-                      href={`/project/${link.slug}`}
+                      href={getPath(`/project/${link.slug}`)}
                       className="text-sm text-brand-light hover:text-brand-light/80 transition-colors flex items-center gap-2"
                     >
                       <span className="text-text-tertiary text-xs">→</span>
@@ -71,7 +72,7 @@ export function ProjectCrossLinks({
                 {byPractice.map((link) => (
                   <li key={link.slug}>
                     <a
-                      href={`/project/${link.slug}`}
+                      href={getPath(`/project/${link.slug}`)}
                       className="text-sm text-brand-light hover:text-brand-light/80 transition-colors flex items-center gap-2"
                     >
                       <span className="text-text-tertiary text-xs">→</span>
@@ -87,7 +88,7 @@ export function ProjectCrossLinks({
         {/* Back to lab */}
         <div className="mt-8 pt-6 border-t border-border">
           <a
-            href="/#lab"
+            href={getPath("/#lab")}
             className="text-sm text-text-tertiary hover:text-text-secondary transition-colors"
           >
             &larr; 返回 Product Lab

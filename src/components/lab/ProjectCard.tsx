@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { cn, formatDateRange } from "@/lib/utils";
+import { cn, formatDateRange, getPath } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 
 export interface ProjectData {
@@ -67,7 +67,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <div ref={ref}>
       <motion.a
-        href={`/project/${project.slug}`}
+        href={getPath(`/project/${project.slug}`)}
         className={cn(
           "group block rounded-lg border border-border bg-bg-secondary p-6 md:p-8",
           "transition-all duration-300 ease-out",

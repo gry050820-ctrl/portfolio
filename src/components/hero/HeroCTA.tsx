@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { getPath } from "@/lib/utils";
 
 interface HeroCTAProps {
   primary: { label: string; href: string };
@@ -29,11 +30,11 @@ export function HeroCTA({
         ease: [0.25, 0.1, 0.25, 1],
       }}
     >
-      <Button variant="primary" size="lg" href={primary.href}>
+      <Button variant="primary" size="lg" href={primary.href.startsWith("#") ? primary.href : getPath(primary.href)}>
         {primary.label}
         <span className="ml-1">&rarr;</span>
       </Button>
-      <Button variant="secondary" size="lg" href={secondary.href}>
+      <Button variant="secondary" size="lg" href={secondary.href.startsWith("#") ? secondary.href : getPath(secondary.href)}>
         {secondary.label}
       </Button>
     </motion.div>

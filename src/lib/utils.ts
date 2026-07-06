@@ -2,11 +2,22 @@
  * Portfolio V1 · Utility Functions
  */
 
+import { siteConfig } from "@/data/site.config";
+
 /**
  * Merge class names, filtering out falsy values.
  */
 export function cn(...inputs: (string | undefined | false | null)[]): string {
   return inputs.filter(Boolean).join(" ");
+}
+
+/**
+ * Prepend the site basePath to a path.
+ * In production (GitHub Pages), basePath = '/portfolio'.
+ * In dev/Vercel, basePath may be empty.
+ */
+export function getPath(path: string): string {
+  return `${siteConfig.basePath}${path}`;
 }
 
 /**

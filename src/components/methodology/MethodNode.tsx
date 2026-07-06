@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn, getPath } from "@/lib/utils";
 
 interface EvidenceAnchor {
   label: string;
@@ -140,7 +140,7 @@ export function MethodNode({
                   {evidenceAnchors.map((anchor) => (
                     <a
                       key={anchor.slug}
-                      href={`/project/${anchor.slug}`}
+                      href={getPath(`/project/${anchor.slug}`)}
                       className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-md border border-border bg-bg-tertiary text-text-secondary hover:text-brand-light hover:border-border-hover transition-colors"
                       onClick={(e) => e.stopPropagation()}
                     >

@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { siteConfig } from "@/data/site.config";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { getPath } from "@/lib/utils";
 
 /**
  * Contact Section.
@@ -48,7 +49,7 @@ export function ContactSection() {
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Button variant="primary" size="lg" href={hero.cta.secondary.href}>
+            <Button variant="primary" size="lg" href={getPath(hero.cta.secondary.href)}>
               下载简历 PDF
             </Button>
             {contact.email && (

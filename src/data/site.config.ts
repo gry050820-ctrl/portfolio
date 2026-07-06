@@ -7,13 +7,16 @@
  */
 
 export const siteConfig = {
+  /* ── Base Path ── */
+  basePath: "/portfolio",
+
   /* ── Metadata ── */
   name: "柚子",
   title: "AI 产品经理 · 作品集",
   description:
     "AI 产品经理个人作品集 —— 产品思维 × AI 实践，让想法成为可落地的产品。",
-  url: "https://your-domain.com",
-  ogImage: "/og-image.png",
+  url: "https://gry050820-ctrl.github.io/portfolio",
+  ogImage: "/portfolio/og-image.png",
 
   /* ── Hero ── */
   hero: {

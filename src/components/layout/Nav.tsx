@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn, scrollToSection } from "@/lib/utils";
+import { cn, scrollToSection, getPath } from "@/lib/utils";
 import { siteConfig } from "@/data/site.config";
 import { Container } from "@/components/ui/Container";
 
@@ -64,7 +64,7 @@ export function Nav() {
                 </button>
               ))}
               <a
-                href={siteConfig.nav.resume.href}
+                href={getPath(siteConfig.nav.resume.href)}
                 className="text-sm px-4 py-1.5 rounded-md border border-border text-text-secondary hover:text-text-primary hover:border-border-hover transition-all"
               >
                 {siteConfig.nav.resume.label}
@@ -118,7 +118,7 @@ export function Nav() {
               </motion.button>
             ))}
             <motion.a
-              href={siteConfig.nav.resume.href}
+              href={getPath(siteConfig.nav.resume.href)}
               className="mt-4 text-lg px-6 py-2 rounded-md border border-border text-text-secondary hover:text-text-primary hover:border-border-hover transition-all"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}

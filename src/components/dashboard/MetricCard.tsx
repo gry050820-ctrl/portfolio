@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn, getPath } from "@/lib/utils";
 
 export interface MetricEvidence {
   label: string;
@@ -119,7 +119,7 @@ export function MetricCard({
               {evidence.map((item) => (
                 <li key={item.href}>
                   <a
-                    href={item.href}
+                    href={getPath(item.href)}
                     className="text-xs text-brand-light hover:text-brand-light/80 transition-colors flex items-center gap-1.5"
                     onClick={(e) => e.stopPropagation()}
                   >

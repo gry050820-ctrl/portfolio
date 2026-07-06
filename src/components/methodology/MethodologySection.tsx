@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { siteConfig } from "@/data/site.config";
+import { getPath } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { MethodNode } from "./MethodNode";
 
@@ -39,7 +40,7 @@ export function MethodologySection() {
           <p className="text-sm text-text-tertiary max-w-lg">
             以{" "}
             <a
-              href={`/project/${methodology.caseSlug}`}
+              href={getPath(`/project/${methodology.caseSlug}`)}
               className="text-brand-light hover:text-brand-light/80 transition-colors"
             >
               {methodology.caseProject}

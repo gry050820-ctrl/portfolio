@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn, getPath } from "@/lib/utils";
 
 interface Evidence {
   label: string;
@@ -167,7 +167,7 @@ export function CapabilityCard({
                     </p>
                     {lvl.evidence && lvl.level <= currentLevel && (
                       <a
-                        href={`/project/${lvl.evidence.slug}`}
+                        href={getPath(`/project/${lvl.evidence.slug}`)}
                         className="inline-flex items-center gap-1 text-[11px] text-brand-light hover:text-brand-light/80 mt-1 transition-colors"
                         onClick={(e) => e.stopPropagation()}
                       >
