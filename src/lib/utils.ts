@@ -17,6 +17,7 @@ export function cn(...inputs: (string | undefined | false | null)[]): string {
  * In dev/Vercel, basePath may be empty.
  */
 export function getPath(path: string): string {
+  if (path.startsWith("http") || path.startsWith("#")) return path;
   return `${siteConfig.basePath}${path}`;
 }
 

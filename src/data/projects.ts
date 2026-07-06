@@ -231,7 +231,7 @@ export const projects: ProjectDetail[] = [
 
     resources: [
       { label: "📖 产品说明书", href: "/docs/ai-usb-guide.html", type: "manual" },
-      { label: "⬇️ 下载安装包", href: "#", type: "download" },
+      { label: "⬇️ 下载安装包", href: "https://github.com/gry050820-ctrl/portfolio/releases/download/v1.0.0/claude.code.3.zip", type: "download" },
     ],
 
     takeaway:

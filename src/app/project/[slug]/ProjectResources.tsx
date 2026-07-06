@@ -33,7 +33,7 @@ export function ProjectResources({ resources }: ProjectResourcesProps) {
               return (
                 <a
                   key={res.label}
-                  href={isDisabled ? undefined : (res.href.startsWith("#") ? res.href : `${siteConfig.basePath}${res.href}`)}
+                  href={isDisabled ? undefined : (res.href.startsWith("#") || res.href.startsWith("http") ? res.href : `${siteConfig.basePath}${res.href}`)}
                   className={`inline-flex items-center gap-2 px-5 py-3 rounded-md border text-sm font-medium transition-all ${
                     isDisabled
                       ? "border-dashed border-border/50 text-text-tertiary cursor-not-allowed"
