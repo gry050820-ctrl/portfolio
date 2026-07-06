@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 编程助手 · 随身版 — 插上 U 盘，5 分钟拥有 AI 编程环境</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   Design Tokens
+   ============================================ */
+:root {
+  --bg-deep: #060b14;
+  --bg-card: #111827;
+  --bg-card-hover: #161e30;
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-medium: rgba(255,255,255,0.10);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --accent: #3b82f6;
+  --accent-soft: rgba(59,130,246,0.12);
+  --accent-glow: rgba(59,130,246,0.2);
+  --green: #10b981;
+  --green-soft: rgba(16,185,129,0.12);
+  --amber: #f59e0b;
+  --amber-soft: rgba(245,158,11,0.12);
+  --font-display: 'Plus Jakarta Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --max-width: 1000px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+body::after {
+  content: ''; position: fixed; top: -30%; left: 50%; transform: translateX(-50%);
+  width: 1000px; height: 1000px;
+  background: radial-gradient(ellipse at center, rgba(59,130,246,0.05) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--accent); z-index: 100;
+  width: 0%; transition: width 0.15s linear;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Nav */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding: 14px 24px;
+  background: rgba(6,11,20,0.7);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.nav-inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 15px; letter-spacing: -0.01em;
+  color: var(--text-primary); text-decoration: none;
+}
+.nav-logo-icon {
+  width: 30px; height: 30px; background: var(--accent);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+.nav-cta {
+  background: var(--accent); color: #fff; border: none;
+  padding: 8px 20px; border-radius: 20px; font-size: 13px;
+  font-weight: 600; cursor: pointer; transition: all 0.2s;
+  font-family: var(--font-body); text-decoration: none; display: inline-block;
+}
+.nav-cta:hover { background: #2563eb; transform: translateY(-1px); }
+
+/* ============================================
+   Hero
+   ============================================ */
+.hero {
+  position: relative; z-index: 1;
+  padding: 140px 24px 80px; text-align: center;
+  max-width: 680px; margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-soft); border: 1px solid rgba(59,130,246,0.2);
+  color: #93bbfd; padding: 6px 16px; border-radius: 100px;
+  font-size: 13px; font-weight: 500; margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5.5vw, 54px); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 20px;
+}
+.hero h1 span {
+  background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 50%, #a5b4fc 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-desc {
+  font-size: 17px; color: var(--text-secondary);
+  max-width: 480px; margin: 0 auto 36px; line-height: 1.65;
+}
+.hero-meta {
+  display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.hero-meta-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; color: var(--text-tertiary);
+}
+.hero-meta-item svg { width: 16px; height: 16px; opacity: 0.55; }
+.btn-primary {
+  background: #f1f5f9; color: #0a0f1a; border: none;
+  padding: 14px 36px; border-radius: 100px; font-size: 15px;
+  font-weight: 600; cursor: pointer; transition: all 0.2s;
+  font-family: var(--font-body); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+.btn-secondary {
+  background: transparent; color: var(--text-primary);
+  border: 1px solid var(--border-medium); padding: 14px 36px;
+  border-radius: 100px; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; font-family: var(--font-body);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+/* ============================================
+   Section shared
+   ============================================ */
+.section {
+  position: relative; z-index: 1;
+  padding: 90px 24px; max-width: var(--max-width); margin: 0 auto;
+}
+.section-label {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 38px); font-weight: 700;
+  letter-spacing: -0.02em; margin-bottom: 14px; line-height: 1.2;
+}
+.section-subtitle {
+  font-size: 16px; color: var(--text-secondary);
+  max-width: 520px; line-height: 1.6;
+}
+
+/* ============================================
+   Results Grid
+   ============================================ */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px; margin-top: 44px;
+}
+.result-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); padding: 32px 22px 28px;
+  text-align: center; transition: all 0.3s; position: relative; overflow: hidden;
+}
+.result-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.25), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.result-card:hover {
+  border-color: var(--border-medium); background: var(--bg-card-hover);
+  transform: translateY(-3px);
+}
+.result-card:hover::before { opacity: 1; }
+.result-card .icon-wrap {
+  width: 52px; height: 52px; margin: 0 auto 18px;
+  border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+.icon-wrap.blue { background: var(--accent-soft); }
+.icon-wrap.green { background: var(--green-soft); }
+.icon-wrap.amber { background: var(--amber-soft); }
+.result-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.result-card p { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; }
+
+/* ============================================
+   Steps — visual recipe style
+   ============================================ */
+.steps-wrapper { margin-top: 52px; }
+
+.step-row {
+  display: flex; gap: 32px; align-items: stretch;
+  padding: 36px 0; border-bottom: 1px solid var(--border-subtle);
+  opacity: 0; transform: translateY(28px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.step-row.visible { opacity: 1; transform: translateY(0); }
+.step-row:last-child { border-bottom: none; }
+
+/* Step visual (left panel — screenshot) */
+.step-visual {
+  flex-shrink: 0; width: 300px;
+  background: #0a0f1a;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s; position: relative; overflow: hidden;
+  cursor: pointer;
+}
+.step-visual img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s;
+}
+.step-visual:hover img { transform: scale(1.03); }
+.step-visual:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 0 40px rgba(59,130,246,0.08);
+}
+
+/* Zoom hint on hover */
+.step-visual::after {
+  content: '🔍 点击放大';
+  position: absolute; bottom: 10px; right: 12px;
+  font-size: 11px; color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.6); padding: 3px 10px;
+  border-radius: 10px; opacity: 0; transition: opacity 0.25s;
+  pointer-events: none;
+}
+.step-visual:hover::after { opacity: 1; }
+
+/* Two images side by side */
+.step-visual.has-two {
+  flex-direction: column; gap: 6px; padding: 10px;
+}
+.step-visual.has-two img {
+  width: 100%; height: calc(50% - 3px);
+  object-fit: contain; border-radius: 6px;
+}
+.step-visual.has-two::after { bottom: auto; top: 10px; }
+
+/* Step text (right panel) */
+.step-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--accent-soft); color: #60a5fa;
+  font-size: 16px; font-weight: 700; margin-bottom: 12px;
+  transition: all 0.3s;
+}
+.step-row.completed .step-num { background: var(--green); color: #fff; }
+
+.step-text h3 {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 700; margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.step-text .step-subtitle {
+  font-size: 13px; color: var(--text-tertiary); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.step-tag {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 100px; letter-spacing: 0.02em;
+}
+.step-tag.auto { background: var(--green-soft); color: #6ee7b7; }
+.step-tag.do   { background: var(--accent-soft); color: #93bbfd; }
+.step-tag.warn { background: var(--amber-soft); color: #fcd34d; }
+
+.step-actions {
+  list-style: none; padding: 0;
+}
+.step-actions li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+  line-height: 1.55;
+}
+.step-actions li .dot {
+  flex-shrink: 0; width: 20px; height: 20px; margin-top: 1px;
+  border-radius: 50%; background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #60a5fa; font-weight: 700;
+}
+
+.step-note {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 14px; padding: 10px 14px;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.12);
+  border-radius: var(--radius-sm);
+  font-size: 13px; color: #fcd34d; line-height: 1.55;
+}
+.step-note svg { flex-shrink: 0; margin-top: 2px; }
+
+.step-good {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 10px; padding: 10px 14px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(59,130,246,0.1);
+  border-radius: var(--radius-sm);
+  font-size: 13px; color: #93bbfd; line-height: 1.55;
+}
+.step-good svg { flex-shrink: 0; margin-top: 2px; }
+
+/* Extra feature images (step 5 bonus) */
+.extra-imgs {
+  display: flex; gap: 10px; margin-top: 14px;
+}
+.extra-imgs .extra-img-wrap {
+  flex: 1; background: #0a0f1a;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); overflow: hidden;
+  cursor: pointer; transition: all 0.25s;
+}
+.extra-imgs .extra-img-wrap:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+}
+.extra-imgs img {
+  width: 100%; display: block;
+}
+.extra-imgs .extra-label {
+  padding: 8px 12px; font-size: 11px; color: var(--text-tertiary);
+  text-align: center; background: var(--bg-card);
+}
+
+/* ============================================
+   Lightbox
+   ============================================ */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  align-items: center; justify-content: center;
+  padding: 40px; cursor: pointer;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 92vw; max-height: 90vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute; top: 20px; right: 28px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: none;
+  color: #fff; font-size: 22px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.18); }
+.lightbox-hint {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  pointer-events: none;
+}
+
+/* ============================================
+   Feature cards
+   ============================================ */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px; margin-top: 44px;
+}
+.feature-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); padding: 26px;
+  transition: all 0.25s;
+}
+.feature-card:hover { background: var(--bg-card-hover); border-color: var(--border-medium); }
+.feature-card .feat-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+.feature-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.01em; }
+.feature-card p { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; }
+
+/* ============================================
+   FAQ
+   ============================================ */
+.faq-list { margin-top: 44px; display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); overflow: hidden; transition: all 0.3s;
+}
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 18px 22px; font-size: 15px; font-weight: 500;
+  color: var(--text-primary); background: none; border: none;
+  cursor: pointer; font-family: var(--font-body); text-align: left;
+  letter-spacing: -0.01em;
+}
+.faq-q:hover { color: #fff; }
+.faq-q svg { flex-shrink: 0; width: 18px; height: 18px; opacity: 0.45; transition: transform 0.3s; }
+.faq-item.open .faq-q svg { transform: rotate(45deg); opacity: 0.7; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.faq-item.open .faq-a { max-height: 500px; }
+.faq-a-inner { padding: 0 22px 18px; font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+
+/* ============================================
+   CTA + Footer
+   ============================================ */
+.cta-section {
+  position: relative; z-index: 1; text-align: center;
+  padding: 80px 24px 70px; max-width: 540px; margin: 0 auto;
+}
+.cta-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 34px); font-weight: 700;
+  letter-spacing: -0.02em; margin-bottom: 10px;
+}
+.cta-section p { font-size: 16px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.6; }
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+.footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border-subtle);
+  padding: 28px 24px; text-align: center;
+  font-size: 13px; color: var(--text-tertiary);
+  max-width: var(--max-width); margin: 0 auto;
+}
+
+/* ============================================
+   Reveal animation
+   ============================================ */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 800px) {
+  .hero { padding: 110px 20px 50px; }
+  .section { padding: 60px 20px; }
+  .step-row { flex-direction: column; gap: 18px; padding: 28px 0; }
+  .step-visual { width: 100%; max-height: 340px; }
+  .step-visual img { max-height: 320px; }
+  .step-visual.has-two { flex-direction: row; }
+  .step-visual.has-two img { height: auto; max-height: 240px; width: calc(50% - 3px); }
+  .cta-section { padding: 50px 20px; }
+}
+@media (max-width: 768px) {
+  .results-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 26px; }
+  .hero-desc { font-size: 15px; }
+  .section-title { font-size: 23px; }
+  .results-grid { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .lightbox { padding: 16px; }
+}
+
+::selection { background: rgba(59,130,246,0.3); color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="关闭">✕</button>
+  <img src="" alt="" id="lightboxImg">
+  <span class="lightbox-hint">点击空白处关闭 · 滚动滚轮可缩放</span>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">⚡</div>
+      AI 编程助手 · 随身版
+    </a>
+    <a href="AI-Setup.bat" class="nav-cta">开始安装</a>
+  </div>
+</nav>
+
+<!-- ================================================
+     Hero
+     ================================================ -->
+<header class="hero">
+  <div class="hero-badge reveal">
+    <span class="hero-badge-dot"></span>
+    U 盘即插即用 · 无需联网安装环境
+  </div>
+  <h1 class="reveal" style="transition-delay:0.08s">
+    插上 U 盘，<br>5 分钟后你就在用 <span>AI 写代码</span>
+  </h1>
+  <p class="hero-desc reveal" style="transition-delay:0.16s">
+    不用装环境、不用配变量、不用读文档。<br>跟着界面点几下，Git、Node.js、VS Code、Claude Code 全部就绪。
+  </p>
+  <div class="hero-meta reveal" style="transition-delay:0.22s">
+    <div class="hero-meta-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      约 5 分钟
+    </div>
+    <div class="hero-meta-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      零基础也能用
+    </div>
+    <div class="hero-meta-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      开箱即用
+    </div>
+  </div>
+  <a href="AI-Setup.bat" class="btn-primary reveal" style="transition-delay:0.28s">
+    立即开始安装 ↓
+  </a>
+</header>
+
+<!-- ================================================
+     Results — what you get
+     ================================================ -->
+<section class="section">
+  <div class="section-label reveal">装完你就拥有</div>
+  <h2 class="section-title reveal" style="transition-delay:0.04s">一台「AI 就绪」的电脑</h2>
+  <p class="section-subtitle reveal" style="transition-delay:0.08s">
+    不只是装了一堆软件——而是一套互相配合好的 AI 编程环境。打开 VS Code 就能开始。
+  </p>
+  <div class="results-grid">
+    <div class="result-card reveal" style="transition-delay:0.08s">
+      <div class="icon-wrap blue">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <h4>Claude Code</h4>
+      <p>在终端里跟 AI 对话写代码，已配置好，打开即用</p>
+    </div>
+    <div class="result-card reveal" style="transition-delay:0.12s">
+      <div class="icon-wrap green">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      </div>
+      <h4>VS Code 中文版</h4>
+      <p>中文界面 + Claude 扩展，写代码和聊 AI 一个窗口搞定</p>
+    </div>
+    <div class="result-card reveal" style="transition-delay:0.16s">
+      <div class="icon-wrap amber">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </div>
+      <h4>一键切换模型</h4>
+      <p>在对话框输入指令就能换模型，DeepSeek 等主流模型预设就绪</p>
+    </div>
+    <div class="result-card reveal" style="transition-delay:0.20s">
+      <div class="icon-wrap blue">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <h4>Git + Node.js</h4>
+      <p>开发必备工具一起装好，不用自己一个个下载</p>
+    </div>
+    <div class="result-card reveal" style="transition-delay:0.24s">
+      <div class="icon-wrap green">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <h4>中文 + 默认配置</h4>
+      <p>界面中文、模型预设，调的比你自己配的还顺手</p>
+    </div>
+    <div class="result-card reveal" style="transition-delay:0.28s">
+      <div class="icon-wrap amber">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h4>U 盘随身带</h4>
+      <p>换电脑？插上再来一遍，环境完全一样</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     Steps
+     ================================================ -->
+<section class="section" id="steps">
+  <div class="section-label reveal">跟着截图操作</div>
+  <h2 class="section-title reveal" style="transition-delay:0.04s">5 步，从零到开始编程</h2>
+  <p class="section-subtitle reveal" style="transition-delay:0.08s">
+    每张截图都可以<strong>点击放大</strong>查看。照着点就行，不需要理解原理。
+  </p>
+
+  <div class="steps-wrapper">
+
+    <!-- Step 1 -->
+    <div class="step-row" data-step="1">
+      <div class="step-visual" onclick="openLightbox('ai-usb-images/step_1.png')">
+        <img src="ai-usb-images/step_1.png" alt="U盘文件夹，红箭头指着AI一键部署文件">
+      </div>
+      <div class="step-text">
+        <div class="step-num">1</div>
+        <h3>插 U 盘，双击启动</h3>
+        <div class="step-subtitle"><span class="step-tag do">需要你点一下</span> 不到 10 秒</div>
+        <ul class="step-actions">
+          <li><span class="dot">①</span> 把 U 盘插到电脑上</li>
+          <li><span class="dot">②</span> 打开 U 盘，找到 <strong>ai-usb-installer</strong> 文件夹</li>
+          <li><span class="dot">③</span> 双击红箭头指着的 <strong>「AI一键部署」</strong> 文件</li>
+        </ul>
+        <div class="step-good">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>不管什么电脑、U 盘是什么盘符，都能正常运行——安装器已经帮你处理好了。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-row" data-step="2">
+      <div class="step-visual" onclick="openLightbox('ai-usb-images/step_2.png')">
+        <img src="ai-usb-images/step_2.png" alt="安装器欢迎首页，6步安装向导">
+      </div>
+      <div class="step-text">
+        <div class="step-num">2</div>
+        <h3>打开安装器，看到欢迎页</h3>
+        <div class="step-subtitle"><span class="step-tag do">需要你点一下</span> 约 30 秒</div>
+        <ul class="step-actions">
+          <li><span class="dot">①</span> 双击后会看到这个欢迎界面（如左图）</li>
+          <li><span class="dot">②</span> 顶部显示 6 个步骤，告诉你接下来要做什么</li>
+          <li><span class="dot">③</span> 点右下角 <strong>「下一步」</strong>，开始环境检测</li>
+        </ul>
+        <div class="step-good">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>如果电脑已经有这些工具，安装器会自动跳过，不会重复安装或覆盖你的东西。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — Now with the correct screenshot: "安装 Claude Code" installer page -->
+    <div class="step-row" data-step="3">
+      <div class="step-visual" onclick="openLightbox('ai-usb-images/step_install.png')">
+        <img src="ai-usb-images/step_install.png" alt="安装器第4步：安装Claude Code，含CC Switch和扩展">
+      </div>
+      <div class="step-text">
+        <div class="step-num">3</div>
+        <h3>安装 Claude Code 全家桶</h3>
+        <div class="step-subtitle"><span class="step-tag auto">点安装就行</span> 约 2 分钟</div>
+        <ul class="step-actions">
+          <li><span class="dot">①</span> 按照安装器引导，一步步点 <strong>「安装」</strong></li>
+          <li><span class="dot">②</span> 会依次装好：CC Switch → Claude Code → VS Code 扩展</li>
+          <li><span class="dot">③</span> 看到进度条跑完、打勾，这一步就完成了</li>
+        </ul>
+        <div class="step-good">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>中文界面、注册绕过、模型配置——这些烦人的事安装器都替你做了，不需要手动改任何文件。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 — API Key: two images (installer UI + DeepSeek website) -->
+    <div class="step-row" data-step="4">
+      <div class="step-visual has-two" onclick="event.stopPropagation();">
+        <img src="ai-usb-images/step_4.png" alt="DeepSeek官网复制API Key" onclick="openLightbox('ai-usb-images/step_4.png')" style="cursor:pointer">
+        <img src="ai-usb-images/step_4b.png" alt="安装器配置API Key界面" onclick="openLightbox('ai-usb-images/step_4b.png')" style="cursor:pointer">
+      </div>
+      <div class="step-text">
+        <div class="step-num">4</div>
+        <h3>配置 API Key</h3>
+        <div class="step-subtitle"><span class="step-tag warn">需要你操作</span> 约 2 分钟</div>
+        <ul class="step-actions">
+          <li><span class="dot">①</span> 去 <strong>DeepSeek 官网</strong>（platform.deepseek.com）注册账号</li>
+          <li><span class="dot">②</span> 进入「API Keys」页面，点「创建 API Key」，<strong>点复制</strong>（如上图）</li>
+          <li><span class="dot">③</span> 回到安装器，在 API Key 配置页<strong>粘贴进去</strong>，选 DeepSeek，点确定</li>
+        </ul>
+        <div class="step-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span><strong>Key 是你的私人凭证，需要你自己申请。</strong>新用户注册有免费额度，正常写代码一个月花不了几块钱。Key 只存在你的电脑上，不会上传。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 — VS Code + bonus: Chinese pack & model switch -->
+    <div class="step-row" data-step="5">
+      <div class="step-visual" onclick="openLightbox('ai-usb-images/step_5_new.png')">
+        <img src="ai-usb-images/step_5_new.png" alt="VS Code中Claude Code已就绪，终端已打开">
+      </div>
+      <div class="step-text">
+        <div class="step-num">5</div>
+        <h3>打开 VS Code，开始编程</h3>
+        <div class="step-subtitle"><span class="step-tag do">🎉 完成了</span></div>
+        <ul class="step-actions">
+          <li><span class="dot">①</span> 安装器会自动打开 VS Code，Claude Code 扩展已经就绪</li>
+          <li><span class="dot">②</span> 打开终端，输入 <code>claude</code> 就能跟 AI 对话写代码了</li>
+        </ul>
+        <div class="step-good">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>如果界面还是英文，或者想切换 AI 模型——看下面的两个小技巧。</span>
+        </div>
+
+        <!-- Bonus features with corrected descriptions -->
+        <div class="extra-imgs">
+          <div class="extra-img-wrap" onclick="openLightbox('ai-usb-images/step_7.png')">
+            <img src="ai-usb-images/step_7.png" alt="VS Code扩展商店搜索中文语言包">
+            <div class="extra-label">📌 手动安装中文语言包（避免自动安装出 bug）</div>
+          </div>
+          <div class="extra-img-wrap" onclick="openLightbox('ai-usb-images/step_8.png')">
+            <img src="ai-usb-images/step_8.png" alt="在对话框输入指令切换AI模型">
+            <div class="extra-label">📌 在对话框输入 <code>@switch-model &lt;deepseek-v4-pro&gt;</code> 换模型</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================
+     Features
+     ================================================ -->
+<section class="section">
+  <div class="section-label reveal">为什么省心</div>
+  <h2 class="section-title reveal" style="transition-delay:0.04s">跟其他教程不一样的地方</h2>
+  <p class="section-subtitle reveal" style="transition-delay:0.08s">
+    大多数人教你装 AI 编程工具的方式：先看 3 篇文档、配 5 个环境变量、排 8 个报错。我们不想这样。
+  </p>
+  <div class="feature-grid">
+    <div class="feature-card reveal" style="transition-delay:0.08s">
+      <span class="feat-icon">🔌</span>
+      <h4>真正的即插即用</h4>
+      <p>不需要先装任何东西。U 盘插上，点两下，完事。</p>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.12s">
+      <span class="feat-icon">📦</span>
+      <h4>离线也能装</h4>
+      <p>核心组件都在 U 盘里，不依赖网络。网不好？没关系。</p>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.16s">
+      <span class="feat-icon">🧹</span>
+      <h4>不弄乱你的电脑</h4>
+      <p>装了什么一清二楚。不想用了有卸载脚本，干干净净。</p>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.20s">
+      <span class="feat-icon">🌐</span>
+      <h4>中文优先</h4>
+      <p>界面中文、指引中文、出错了提示也是中文。没有语言障碍。</p>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.24s">
+      <span class="feat-icon">🔄</span>
+      <h4>换电脑不慌</h4>
+      <p>U 盘随身带。换台电脑，插上再来一遍，5 分钟环境一模一样。</p>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.28s">
+      <span class="feat-icon">💬</span>
+      <h4>微信也能用</h4>
+      <p>装了 cc-connect 的话，微信上就能跟 Claude 对话。不在电脑前也不耽误。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     FAQ
+     ================================================ -->
+<section class="section">
+  <div class="section-label reveal">你可能想问</div>
+  <h2 class="section-title reveal" style="transition-delay:0.04s">常见问题</h2>
+  <div class="faq-list">
+    <div class="faq-item reveal" style="transition-delay:0.06s">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        API Key 是什么？要花钱吗？
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>API Key 就是你的「AI 使用凭证」——类似于地铁卡，刷一下证明是你、该用你的账户。</p>
+        <p style="margin-top:8px"><strong>不一定要花很多钱。</strong>DeepSeek 新用户注册送免费额度，正常写代码一个月花不了几块钱。去 <code>platform.deepseek.com</code> 注册就能拿到。具体操作见上面第 4 步的截图。</p>
+      </div></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:0.10s">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        我完全不会这些，能搞定吗？
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>这个安装器就是为你做的。</p>
+        <p style="margin-top:8px">你唯一需要做的事情：插 U 盘 → 双击 → 点「下一步」→ 填 Key → 完成。每一步界面上都写得清清楚楚，照着截图点就行。</p>
+        <p style="margin-top:8px">唯一需要你自己动手的环节是申请 API Key——因为那是你的私人账号，我们没法替你注册。</p>
+      </div></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:0.14s">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        换了一台电脑怎么办？
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>U 盘插到新电脑上，再跑一次安装器——5 分钟，环境完全一样。</p>
+        <p style="margin-top:8px">所有安装包都在 U 盘里，不用重新下载。API Key 需要重新填一次（出于安全，Key 不会跟着 U 盘走）。</p>
+      </div></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:0.18s">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        出错了怎么办？
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>大部分问题安装器自己能处理：网络断了会换备用方案、装过的会自动跳过、权限不够会提醒你。</p>
+        <p style="margin-top:8px">实在不行，U 盘里有卸载脚本，清干净重来一遍就好——反正也就 5 分钟的事。</p>
+      </div></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:0.22s">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        能用别的模型吗？不想用 DeepSeek？
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>当然可以。安装器里列出了多个模型提供商（OpenAI、Google Gemini 等），选你想要的就行。</p>
+        <p style="margin-top:8px">装完之后想换模型，在 Claude Code 对话框里输入 <code>@switch-model &lt;模型名&gt;</code> 就能切换。具体见上面第 5 步的截图。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     CTA
+     ================================================ -->
+<section class="cta-section" id="cta">
+  <h2 class="reveal">准备好了吗？</h2>
+  <p class="reveal" style="transition-delay:0.08s">
+    插上 U 盘，5 分钟后你就在用 AI 写代码了。<br>不需要教程，不需要配置，不需要折腾。
+  </p>
+  <div class="cta-buttons reveal" style="transition-delay:0.14s">
+    <a href="AI-Setup.bat" class="btn-primary">⚡ 立即开始安装</a>
+    <a href="#steps" class="btn-secondary">📖 查看图文教程</a>
+  </div>
+</section>
+
+<footer class="footer">
+  AI 编程助手 · 随身版 —— 让每个人都能用上 AI 编程。
+</footer>
+
+<script>
+// ── Progress bar ────────────────────────────
+const bar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const pct = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = pct > 0 ? Math.min((window.scrollY / pct) * 100, 100) + '%' : '0%';
+});
+
+// ── Scroll reveal ───────────────────────────
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal, .step-row').forEach(el => revealObs.observe(el));
+
+// ── Step completion ─────────────────────────
+const stepRows = document.querySelectorAll('.step-row');
+const stepCompObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const n = parseInt(e.target.dataset.step);
+      stepRows.forEach(r => {
+        if (parseInt(r.dataset.step) < n) r.classList.add('completed');
+      });
+    }
+  });
+}, { threshold: 0.5 });
+stepRows.forEach(el => stepCompObs.observe(el));
+
+// ── Lightbox ────────────────────────────────
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  img.src = src;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ── FAQ accordion ───────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    if (el !== item) el.classList.remove('open');
+  });
+  item.classList.toggle('open');
+}
+
+// ── Smooth scroll ───────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>

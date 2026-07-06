@@ -86,6 +86,9 @@ export interface ProjectDetail {
     nextExploration: string;
   };
 
+  /* Resources */
+  resources?: Array<{ label: string; href: string; type: "manual" | "download" | "link" }>;
+
   /* Takeaway */
   takeaway: string;
 
@@ -104,8 +107,8 @@ export const projects: ProjectDetail[] = [
     statusLabel: "已完成",
 
     role: "产品设计 · 用户调研 · 原型验证",
-    period: { start: "2024-10", end: "2025-01" },
-    tools: ["Claude", "Figma", "Notion", "Python"],
+    period: { start: "2026-05" },
+    tools: ["Claude", "Figma", "Notion", "Python", "Coze"],
 
     background: {
       context:
@@ -225,6 +228,11 @@ export const projects: ProjectDetail[] = [
       nextExploration:
         "探索方向：AI 如何理解不同学科的知识结构（理工科的公式、文科的论述逻辑），从而提供更精准的整理和检索。",
     },
+
+    resources: [
+      { label: "📖 产品说明书", href: "/docs/ai-usb-guide.html", type: "manual" },
+      { label: "⬇️ 下载安装包", href: "#", type: "download" },
+    ],
 
     takeaway:
       "用户说想要更好的搜索，但实际需要更少的东西要搜。产品经理的价值不是听懂用户的话，而是听懂话背后的麻烦。",

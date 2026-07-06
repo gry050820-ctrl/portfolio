@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { formatDateRange } from "@/lib/utils";
 import { ProjectDetailNav } from "./ProjectDetailNav";
 import { ProjectCrossLinks } from "./ProjectCrossLinks";
+import { ProjectResources } from "./ProjectResources";
 
 /* ── Static generation ── */
 
@@ -300,6 +301,9 @@ export default async function ProjectPage({
           <InfoBlock label="下一步探索" text={project.nextIteration.nextExploration} />
         </div>
       </ModuleSection>
+
+      {/* ── Resources (optional) ── */}
+      {project.resources && <ProjectResources resources={project.resources} />}
 
       {/* ── Takeaway ── */}
       <section className="py-16 md:py-20">

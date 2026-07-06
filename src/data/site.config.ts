@@ -64,7 +64,7 @@ export const siteConfig = {
           { label: "实习项目 · AI 产品运营", href: "/project/internship" },
           { label: "毕业设计 · 产品思维实践", href: "/project/thesis" },
         ],
-        lastUpdated: "2025.06",
+        lastUpdated: "2026.07",
         clickable: true,
       },
       {
@@ -79,7 +79,7 @@ export const siteConfig = {
           { label: "文档自动化生成工作流", href: "/project/claude-code" },
           { label: "数据分析自动化 Agent", href: "/project/internship" },
         ],
-        lastUpdated: "2025.06",
+        lastUpdated: "2026.07",
         clickable: true,
       },
       {
@@ -94,7 +94,7 @@ export const siteConfig = {
           { label: "实习项目 · 企业级产品实践", href: "/project/internship" },
           { label: "毕业设计 · 从问题到方案", href: "/project/thesis" },
         ],
-        lastUpdated: "2025.06",
+        lastUpdated: "2026.07",
         clickable: true,
       },
       {
@@ -105,13 +105,13 @@ export const siteConfig = {
         description:
           "Claude · GPT · Midjourney · ComfyUI · Cursor · Figma · Notion 等工具的深度整合实践",
         evidence: [],
-        lastUpdated: "2025.06",
+        lastUpdated: "2026.07",
         clickable: false,
       },
     ],
     status: {
       nowBuilding: "AI 自动化视频流水线 v2",
-      lastUpdated: "2025.06",
+      lastUpdated: "2026.07",
       currentExploration: "AI Agent 如何降低内容生产门槛",
     },
   },
@@ -133,7 +133,7 @@ export const siteConfig = {
             role: "产品设计 · 用户调研 · 原型验证",
             tags: ["AI", "产品设计", "用户研究"],
             result: "覆盖 200+ 用户，资料检索时间平均从 5 分钟降至 2 分钟",
-            period: { start: "2024-10", end: "2025-01" },
+            period: { start: "2026-05" },
             coverIcon: "📚",
           },
         ],
@@ -151,8 +151,8 @@ export const siteConfig = {
             statusLabel: "持续迭代",
             role: "流程设计 · Agent 编排 · 工具链搭建",
             tags: ["AI Agent", "自动化", "Claude Code"],
-            result: "视频处理时间从 12 小时/周降至 2 小时/周，正在迭代 v2",
-            period: { start: "2025-02", end: undefined },
+            result: "视频处理时间从 3-5 小时压缩至分钟级，正在迭代 v2",
+            period: { start: "2026-05" },
             coverIcon: "🎬",
           },
           {
@@ -186,7 +186,7 @@ export const siteConfig = {
             role: "工作流设计 · Prompt 工程 · 工具评估",
             tags: ["Claude Code", "Agent", "自动化"],
             result: "搭建 3+ 条自动化工作流，覆盖文档生成、反馈分类、数据处理",
-            period: { start: "2025-03", end: undefined },
+            period: { start: "2026-03" },
             coverIcon: "⚡",
           },
           {
@@ -199,8 +199,8 @@ export const siteConfig = {
             statusLabel: "已完成",
             role: "用户分析 · 运营策略 · 数据验证",
             tags: ["产品运营", "用户增长", "数据分析"],
-            result: "用户首周激活率提升 35%，关键功能使用率翻倍",
-            period: { start: "2025-01", end: "2025-04" },
+            result: "长短期班招生 2,500+ 人，季度 GMV 目标达成",
+            period: { start: "2025-05", end: "2025-08" },
             coverIcon: "💼",
           },
         ],
@@ -569,8 +569,8 @@ export const siteConfig = {
 
   /* ── Contact ── */
   contact: {
-    email: "your-email@example.com",
-    github: "https://github.com/your-handle",
+    email: "3057758042@qq.com",
+    github: "https://github.com/gry050820-ctrl",
     wechat: null, // Set to QR code path when ready
   },
 } as const;
