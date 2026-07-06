@@ -90,6 +90,44 @@ export default async function ProjectPage({
       {/* Divider */}
       <div className="border-t border-border" />
 
+      {/* ── Product Showcase Banner (说明书直达) ── */}
+      {project.resources && project.resources.length > 0 && (
+        <section className="py-10 md:py-12">
+          <Container>
+            <div className="max-w-3xl">
+              <div className="rounded-lg border border-border-active bg-brand-muted/5 p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="shrink-0 text-2xl">📦</div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-text-primary mb-1">
+                    产品交付物
+                  </p>
+                  <p className="text-xs text-text-tertiary">
+                    不只是案例描述——这里有我实际产出的产品说明书和可交付物。HR 可直接查看。
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 shrink-0">
+                  {project.resources.map((res) => {
+                    const isDisabled = res.type === "download" && res.href === "#";
+                    if (isDisabled) return null; // 跳过未就绪的下载链接
+                    return (
+                      <a
+                        key={res.label}
+                        href={res.href}
+                        target={res.type === "manual" ? "_blank" : undefined}
+                        rel={res.type === "manual" ? "noopener noreferrer" : undefined}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-brand text-white text-sm font-medium hover:brightness-110 transition-all"
+                      >
+                        {res.label} →
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
+
       {/* ── Module 1: Background ── */}
       <ModuleSection title="📋 背景 & 问题定义">
         <p className="text-text-secondary leading-relaxed mb-4">
