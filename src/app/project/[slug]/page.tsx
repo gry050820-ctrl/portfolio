@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getProject, getAllProjectSlugs } from "@/data/projects";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { formatDateRange } from "@/lib/utils";
+import { formatDateRange, getPath } from "@/lib/utils";
 import { ProjectDetailNav } from "./ProjectDetailNav";
 import { ProjectCrossLinks } from "./ProjectCrossLinks";
 import { ProjectResources } from "./ProjectResources";
@@ -112,7 +112,7 @@ export default async function ProjectPage({
                     return (
                       <a
                         key={res.label}
-                        href={res.href}
+                        href={getPath(res.href)}
                         target={res.type === "manual" ? "_blank" : undefined}
                         rel={res.type === "manual" ? "noopener noreferrer" : undefined}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-brand text-white text-sm font-medium hover:brightness-110 transition-all"
