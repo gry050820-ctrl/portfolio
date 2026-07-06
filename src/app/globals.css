@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ============================================
+   Portfolio V1 · Design System Tokens
+   ============================================ */
+
+@theme inline {
+  /* ── Background ── */
+  --color-bg-primary: #0b0b12;
+  --color-bg-secondary: rgba(255, 255, 255, 0.03);
+  --color-bg-tertiary: rgba(255, 255, 255, 0.05);
+  --color-bg-hover: rgba(255, 255, 255, 0.06);
+
+  /* ── Brand ── */
+  --color-brand: #6c5ce7;
+  --color-brand-light: #8b5cf6;
+  --color-brand-muted: rgba(108, 92, 231, 0.15);
+  --color-brand-glow: rgba(108, 92, 231, 0.25);
+
+  /* ── Accent ── */
+  --color-accent: #3b82f6;
+
+  /* ── Text ── */
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #a1a1aa;
+  --color-text-tertiary: #71717a;
+
+  /* ── Border ── */
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-border-active: rgba(108, 92, 231, 0.4);
+
+  /* ── Font ── */
+  --font-sans: "Inter", "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Geist Mono", ui-monospace, monospace;
+  --font-display: "Inter Display", "Plus Jakarta Sans", var(--font-sans);
+
+  /* ── Radius ── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Shadow ── */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 30px rgba(108, 92, 231, 0.15);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+:root {
+  --background: var(--color-bg-primary);
+  --foreground: var(--color-text-primary);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Scroll-triggered nav glass effect
+   ============================================ */
+
+.nav-glass {
+  background: rgba(10, 10, 18, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   Text selection
+   ============================================ */
+
+::selection {
+  background: rgba(108, 92, 231, 0.3);
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   Focus ring
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   Utility animations
+   ============================================ */
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-6px); opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
