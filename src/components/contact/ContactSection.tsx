@@ -43,8 +43,8 @@ export function ContactSection() {
           <p className="text-sm text-text-secondary leading-relaxed mb-10">
             不是一个"会写 PRD 的求职者"——
             而是一个能发现问题、快速验证、用 AI 加速落地、
-            并持续迭代的产品实践者。如果你正在寻找一个
-            真正能把想法变成产品的人，我们可以聊聊。
+            并持续迭代的实践者。如果你正在寻找一个
+            真正能把想法跑通的人，我们可以聊聊。
           </p>
 
           {/* CTA buttons */}

@@ -106,7 +106,7 @@ export const projects: ProjectDetail[] = [
     status: "completed",
     statusLabel: "已完成",
 
-    role: "产品设计 · 用户调研 · 原型验证",
+    role: "问题定义 · 用户调研 · 方案设计",
     period: { start: "2026-05" },
     tools: ["Claude", "Cursor", "Python", "Figma", "Notion"],
 

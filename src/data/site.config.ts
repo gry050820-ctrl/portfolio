@@ -12,9 +12,9 @@ export const siteConfig = {
 
   /* ── Metadata ── */
   name: "柚子",
-  title: "AI 产品经理 · 作品集",
+  title: "AI 实践者 · 作品集",
   description:
-    "AI 产品经理个人作品集 —— 产品思维 × AI 实践，让想法成为可落地的产品。",
+    "AI 实践者个人作品集 —— 产品思维 × 自动化 × 内容系统。用 AI 把问题变成可运行的解决方案。",
   url: "https://gry050820-ctrl.github.io/portfolio",
   ogImage: "/portfolio/og-image.png",
 
@@ -22,7 +22,7 @@ export const siteConfig = {
   hero: {
     greeting: "你好，我是 柚子",
     title: "把 AI 做成产品的人",
-    subtitle: "擅长需求拆解 · 快速验证 · AI 工具链搭建 · 产品落地",
+    subtitle: "擅长发现问题 · 快速验证 · AI 工作流搭建 · 把想法跑通",
     cta: {
       primary: { label: "进入作品展厅", href: "#lab" },
       secondary: { label: "下载简历 PDF", href: "/resume.pdf" },
@@ -54,7 +54,7 @@ export const siteConfig = {
   dashboard: {
     metrics: [
       {
-        label: "AI 产品实践项目",
+        label: "AI 实践项目",
         value: 5,
         suffix: "+",
         icon: "🚀",
@@ -86,7 +86,7 @@ export const siteConfig = {
         clickable: true,
       },
       {
-        label: "端到端产品案例",
+        label: "端到端实践案例",
         value: 3,
         suffix: "",
         icon: "📐",
@@ -133,8 +133,8 @@ export const siteConfig = {
             motivation: "我做了一个一键部署的 AI 编程环境。插上 U 盘，5 分钟就能开始写代码——不用配环境、不看报错、不需要任何计算机基础。",
             status: "completed" as const,
             statusLabel: "已完成",
-            role: "产品设计 · 用户调研 · 原型验证",
-            tags: ["AI", "产品设计", "用户研究"],
+            role: "问题定义 · 用户调研 · 方案设计",
+            tags: ["AI", "方案设计", "用户研究"],
             result: "覆盖 200+ 用户，资料检索时间平均从 5 分钟降至 2 分钟",
             period: { start: "2026-05" },
             coverIcon: "📚",
@@ -183,7 +183,7 @@ export const siteConfig = {
             number: 3,
             name: "Claude Code 自动化实践",
             conflict: "产品工作中存在大量重复性任务——PRD 初稿、竞品信息整理、用户反馈分类。这些任务不复杂，但积累起来消耗大量精力。",
-            motivation: "我用 Claude Code 搭建了多个自动化工作流，把重复劳动交给 Agent，把判断留给产品经理。",
+            motivation: "我用 Claude Code 搭建了多个自动化工作流，把重复劳动交给 Agent，把判断留给自己。",
             status: "iterating" as const,
             statusLabel: "持续迭代",
             role: "工作流设计 · Prompt 工程 · 工具评估",
@@ -258,7 +258,7 @@ export const siteConfig = {
     {
       id: "design",
       icon: "✏️",
-      name: "产品设计",
+      name: "方案设计",
       definition: "从需求到方案、信息架构、交互逻辑、原型设计",
       currentLevel: 3,
       maxLevel: 5,
@@ -440,7 +440,7 @@ export const siteConfig = {
           "找到重复出现的挫折点——环境配置是所有初学者的第一道坎，大多数人在这里就放弃了",
           "定义问题而非定义解决方案——用户说想要'更好的教程'，实际需要一个'不用配置就能用的环境'",
         ],
-        keyInsight: "用户说的 ≠ 用户需要的。他们说要教程，实际需要的是跳过教程直接开始。产品经理的价值不是记录需求，而是翻译需求背后的真实困境。",
+        keyInsight: "用户说的 ≠ 用户需要的。他们说要教程，实际需要的是跳过教程直接开始。做出好产品的人，不是记录需求，而是翻译需求背后的真实困境。",
         evidenceAnchors: [
           { label: "AI U 盘 · 背景 & 问题定义", slug: "ai-usb" },
           { label: "AI U 盘 · Opportunity", slug: "ai-usb" },
@@ -473,7 +473,7 @@ export const siteConfig = {
           "选择能最快验证假设的方案——U 盘一键部署，确定性最高、用户心理负担最低",
           "明确记录放弃了什么、为什么——放弃了在线方案的便利性，换来了离线可用和环境 100% 可控",
         ],
-        keyInsight: "产品经理最大的能力不是选择，而是放弃。说'不'比说'好'更需要判断力。放弃了多个 AI 工具的深度集成，才换来真正的'开箱即用'。",
+        keyInsight: "做决策最大的能力不是选择，而是放弃。说'不'比说'好'更需要判断力。放弃了多个 AI 工具的深度集成，才换来真正的'开箱即用'。",
         evidenceAnchors: [
           { label: "AI U 盘 · Trade-off", slug: "ai-usb" },
         ],
@@ -521,7 +521,7 @@ export const siteConfig = {
           "如果重新做一次，具体怎么改——不是抽象的'做得更好'，而是具体的动作",
           "沉淀为可复用的方法论——每个项目的复盘，都成为下一个项目的起点",
         ],
-        keyInsight: "初级 PM 做完就结束了，高级 PM 总是在复盘。复盘不是为了自责，而是为了让下一次的起点更高。",
+        keyInsight: "初级选手做完就结束了，高级选手总是在复盘。复盘不是为了自责，而是为了让下一次的起点更高。",
         evidenceAnchors: [
           { label: "AI U 盘 · 复盘与反思", slug: "ai-usb" },
           { label: "AI U 盘 · 如果重新做一次", slug: "ai-usb" },
@@ -542,7 +542,7 @@ export const siteConfig = {
     },
     {
       date: "2024 中",
-      title: "第一个完整的 AI 产品实践",
+      title: "第一个完整的 AI 实践项目",
       description:
         "完成了 AI U 盘的从 0 到 1——发现小白用户被环境配置劝退的痛点，做了一个一键部署的 AI 编程环境。第一次完整经历了一个产品从想法到落地的全过程，也是第一次深刻理解'用户说的 ≠ 用户需要的'——他们说想要更好的教程，实际需要一个不用配置就能用的环境。",
       highlight: "从学习者到实践者",
@@ -551,7 +551,7 @@ export const siteConfig = {
       date: "2024 末 — 2025 初",
       title: "企业级产品实战",
       description:
-        "通过实习进入真实业务场景，面对真实用户、真实数据和真实约束。主导了用户激活链路的重设计，用数据驱动的方式验证假设。理解了'公司里的 PM'和'自己做项目的 PM'之间的区别。",
+        "通过实习进入真实业务场景，面对真实用户、真实数据和真实约束。主导了用户激活链路的重设计，用数据驱动的方式验证假设。理解了在组织里做产品和独立做产品的区别。",
       highlight: "从个人项目到企业实践",
     },
     {
@@ -563,7 +563,7 @@ export const siteConfig = {
     },
     {
       date: "现在",
-      title: "AI 产品经理 · 持续成长",
+      title: "AI 实践者 · 持续成长",
       description:
         "聚焦 AI 产品方向，持续探索 AI 如何改变产品的构建方式、用户体验和商业模式。这个作品集本身就是一个持续更新的 Product Lab——它记录了我的思考、实践和成长。",
       highlight: "一直在路上",

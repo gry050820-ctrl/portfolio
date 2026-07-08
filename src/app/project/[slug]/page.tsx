@@ -208,7 +208,7 @@ export default async function ProjectPage({
       {/* ── Module 5: Trade-off ── */}
       <ModuleSection title="⚖️ Trade-off · 关键取舍">
         <p className="text-sm text-text-secondary mb-6">
-          产品经理每天都在做取舍。以下是我在这个项目中面对的关键决策：
+          做产品每天都在做取舍。以下是我在这个项目中面对的关键决策：
         </p>
         <div className="space-y-4">
           {project.tradeoffs.map((t, i) => (
