@@ -208,6 +208,28 @@ export const siteConfig = {
           },
         ],
       },
+      {
+        question: "How can AI search visibility become an analyst workflow?",
+        projects: [
+          {
+            slug: "geo-analyst-workspace",
+            number: 5,
+            name: "GEO Analyst Workspace",
+            conflict:
+              "Brands can appear in AI answers without being cited, recommended, or supported by trustworthy evidence. The hard part is turning scattered AI visibility signals into a repeatable analyst workflow.",
+            motivation:
+              "I built a portfolio-safe dynamic demo that shows the full loop: intake, question pool, website evidence, AI answer review, GEO Score, execution briefs, human QA, retest, and acceptance.",
+            status: "completed" as const,
+            statusLabel: "Demo ready",
+            role: "Workflow design / Frontend demo / AI evaluation system thinking",
+            tags: ["GEO", "AI Search", "Dashboard", "Workflow"],
+            result:
+              "Standalone interactive demo with mock data only; no real backend, customer data, CSV import, or report export capability exposed.",
+            period: { start: "2026-07" },
+            coverIcon: "GEO",
+          },
+        ],
+      },
     ],
   },
 

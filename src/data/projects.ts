@@ -246,6 +246,152 @@ export const projects: ProjectDetail[] = [
       { label: "自动化 · Claude Code 实践", slug: "claude-code" },
     ],
   },
+  {
+    slug: "geo-analyst-workspace",
+    number: 5,
+    name: "GEO Analyst Workspace",
+    tagline: "A portfolio-safe dynamic demo for AI search visibility analysis.",
+    status: "completed",
+    statusLabel: "Demo ready",
+
+    role: "Workflow design / Frontend demo / AI evaluation system thinking",
+    period: { start: "2026-07" },
+    tools: ["React", "Vite", "Tailwind", "TypeScript", "GEO workflow design"],
+
+    background: {
+      context:
+        "Generative Engine Optimization work is not just a scorecard problem. A useful analyst workspace has to connect customer context, AI answer evidence, website citation readiness, review status, execution briefs, retest comparison, and acceptance logic.",
+      userProblem:
+        "For HR and interviewers, I needed to show the product and workflow thinking behind a full GEO system without exposing a real business tool, client data, SQLite storage, provider logic, CSV import, or report export capability.",
+      whyExistingSolutionsFail:
+        "A static screenshot is too shallow, but publishing the actual internal tool would expose too much operational capability. The demo needed to feel dynamic while staying safely front-end-only.",
+    },
+
+    opportunity: {
+      whyWorthDoing:
+        "This project shows that I can design the full operating loop around an AI evaluation workflow, not just build isolated pages or scripts.",
+      whyNow:
+        "AI search visibility is becoming a real business concern, but many teams still lack a structured way to turn AI answer evidence into reviewable actions and measurable retests.",
+      myJudgment:
+        "I chose a portfolio-safe dynamic demo: interactive enough to communicate product ability, but deliberately unable to perform real customer work.",
+    },
+
+    thinking: {
+      directions: [
+        "Publish a static case study page with screenshots and report excerpts.",
+        "Build a front-end-only dynamic demo with mock state, dashboard interactions, report tabs, and architecture walkthrough.",
+        "Expose a limited version of the real internal Python web tool.",
+      ],
+      chosenDirection: "Front-end-only dynamic demo",
+      keyDecisions: [
+        {
+          point: "Why not expose the real tool?",
+          detail:
+            "The goal is portfolio demonstration, not public product access. Real project creation, CSV import, provider workflows, SQLite data, and report export would make the repository too operational.",
+        },
+        {
+          point: "Why use a fake ecommerce case?",
+          detail:
+            "A synthetic Chinese ecommerce brand, Qimu Select, makes the case concrete while avoiding real customer data and confidential business rules.",
+        },
+      ],
+    },
+
+    execution: {
+      mvp:
+        "A standalone Vite React demo with dynamic dashboard views, competitor filtering, evidence QA cards, report section switching, and an architecture selector.",
+      aiAcceleration:
+        "AI helped turn the real GEO workflow into a public-safe narrative, generate mock evidence/report copy, and iterate quickly on the frontend structure and visual direction.",
+      milestones: [
+        "Defined public safety boundaries: no backend, no import, no export, no real analysis rules.",
+        "Built the standalone demo under showcase-demo with mock data only.",
+        "Adjusted the visual palette to match the portfolio UI direction.",
+        "Packaged the built demo as static assets under public/demos/geo-analyst for GitHub Pages deployment.",
+      ],
+    },
+
+    tradeoffs: [
+      {
+        decision: "Integration method",
+        optionA: "Rewrite the demo as native Next.js components inside the portfolio.",
+        optionB: "Embed the built standalone demo as static assets and link to it from the portfolio project detail.",
+        chosen: "B",
+        reason:
+          "Static asset embedding keeps the existing portfolio architecture stable and avoids mixing Vite/Tailwind demo dependencies into the Next.js app.",
+      },
+      {
+        decision: "Demo realism",
+        optionA: "Make buttons look fully operational.",
+        optionB: "Keep interactions limited to safe UI state changes and preview tabs.",
+        chosen: "B",
+        reason:
+          "The demo should communicate capability without letting viewers treat it as a usable business tool.",
+      },
+    ],
+
+    aiPractice: {
+      toolsUsed: [
+        { name: "Codex", purpose: "Frontend implementation, repo inspection, and integration planning" },
+        { name: "React", purpose: "Interactive mock workspace UI" },
+        { name: "Tailwind", purpose: "Portfolio-aligned visual system" },
+        { name: "GitHub Pages", purpose: "Static deployment target" },
+      ],
+      aiContribution:
+        "AI accelerated the conversion from internal workflow knowledge into a safe public demo, generated implementation scaffolding, and helped validate build/deployment constraints.",
+      myContribution:
+        "I defined the business boundary, decided what must remain private, selected the case framing, and reviewed the demo as a portfolio artifact instead of an operational product.",
+    },
+
+    impact: {
+      quantitative: [
+        "1 standalone dynamic demo packaged as static assets.",
+        "5 public sections: overview, case study, dashboard, report preview, and architecture.",
+        "0 real backend endpoints, imports, exports, customer datasets, or provider integrations exposed.",
+      ],
+      longTerm:
+        "The project turns a private GEO workflow into an interview-safe artifact that demonstrates product thinking, workflow design, and AI evaluation judgment.",
+    },
+
+    reflection: {
+      didWell: [
+        "Separated portfolio demonstration from real business capability.",
+        "Used a concrete synthetic case instead of vague mock content.",
+        "Kept the demo dynamic enough to show product thinking without exposing operational functions.",
+      ],
+      couldImprove: [
+        "Later, the standalone demo can be rewritten as native Next.js components for tighter design consistency.",
+        "The portfolio copy can be localized more carefully once the overall project ordering is finalized.",
+      ],
+      biggestLesson:
+        "A strong portfolio demo is not the same as a public product. The right artifact shows judgment about what to reveal and what to deliberately withhold.",
+    },
+
+    nextIteration: {
+      whatWouldChange:
+        "I would add a short walkthrough video or annotated screenshots so reviewers can understand the demo even if they do not click through every tab.",
+      pitfallsToAvoid:
+        "Do not connect the public demo to real backend workflows just to make it feel more impressive. That would weaken the safety boundary.",
+      nextExploration:
+        "Explore a native Next.js version of the dashboard preview once the portfolio information architecture is stable.",
+    },
+
+    resources: [
+      { label: "Open dynamic demo", href: "/demos/geo-analyst/index.html", type: "manual" },
+      { label: "Source repository", href: "https://github.com/gry050820-ctrl/portfolio", type: "link" },
+    ],
+
+    takeaway:
+      "The best public demo shows the shape of the thinking without giving away the private machine underneath.",
+
+    relatedByCapability: [
+      { label: "AI practice / Claude Code automation", slug: "claude-code" },
+      { label: "Execution / AI product operations", slug: "internship" },
+    ],
+    relatedByPractice: [
+      { label: "Automation workflow / Video pipeline", slug: "video-pipeline" },
+      { label: "Product packaging / AI USB", slug: "ai-usb" },
+    ],
+  },
 ];
 
 /**
