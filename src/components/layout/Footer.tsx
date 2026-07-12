@@ -1,8 +1,13 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { siteConfig } from "@/data/site.config";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const hideGithub = pathname?.includes("/project/geo-analyst-workspace");
 
   return (
     <footer className="py-12 border-t border-border">
@@ -20,7 +25,7 @@ export function Footer() {
                 Email
               </a>
             )}
-            {siteConfig.contact.github && (
+            {siteConfig.contact.github && !hideGithub && (
               <a
                 href={siteConfig.contact.github}
                 target="_blank"

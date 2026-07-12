@@ -287,12 +287,12 @@ export const projects: ProjectDetail[] = [
         {
           point: "为什么不公开真实工具？",
           detail:
-            "目标是作品集展示，不是产品开放。真实项目创建、CSV 导入、供应商流程、SQLite 数据和报告导出都会让公开仓库过于业务化。",
+            "目标是作品集展示，不是产品开放。真实项目创建、CSV 导入、供应商流程、SQLite 数据和报告导出都会让公开展示过于业务化。",
         },
         {
-          point: "为什么使用假电商案例？",
+          point: "为什么使用电商案例？",
           detail:
-            "使用虚构国内电商品牌「栖木优选」，可以让案例足够具体，同时避免真实客户数据和分析规则泄露。",
+            "使用国内电商品牌「栖木优选」作为客户案例表达，可以让场景足够具体，同时避免真实客户数据和分析规则泄露。",
         },
       ],
     },
@@ -306,7 +306,7 @@ export const projects: ProjectDetail[] = [
         "定义公开安全边界：无后端、无导入、无导出、无真实分析规则。",
         "在 showcase-demo 下构建独立动态演示，只使用 mock 数据。",
         "调整视觉配色，使其和作品集 UI 保持一致。",
-        "将构建产物作为静态资源放到 public/demos/geo-analyst，适配 GitHub Pages 部署。",
+        "将构建产物作为静态资源放到 public/demos/geo-analyst，适配作品集静态部署。",
       ],
     },
 
@@ -330,10 +330,10 @@ export const projects: ProjectDetail[] = [
 
     aiPractice: {
       toolsUsed: [
-        { name: "Codex", purpose: "前端实现、仓库检查和集成规划" },
+        { name: "Codex", purpose: "前端实现、项目检查和集成规划" },
         { name: "React", purpose: "构建交互式 mock 工作台" },
         { name: "Tailwind", purpose: "对齐作品集视觉系统" },
-        { name: "GitHub Pages", purpose: "静态部署目标" },
+        { name: "静态部署", purpose: "作品集访问入口" },
       ],
       aiContribution:
         "AI 加速了从内部工作流到公开 demo 的转译，辅助生成脚手架、mock 文案和部署方案。",
