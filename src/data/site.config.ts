@@ -227,6 +227,9 @@ export const siteConfig = {
               "独立动态演示，只使用前端 mock 数据；不开放真实后端、客户数据、CSV 导入或报告导出能力。",
             period: { start: "2026-07" },
             coverIcon: "GEO",
+            resources: [
+              { label: "查看动态演示", href: "/demos/geo-analyst/index.html", type: "manual" as const },
+            ],
           },
         ],
       },

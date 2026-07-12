@@ -1,29 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container } from "@/components/ui/Container";
 import { getPath } from "@/lib/utils";
 
 /**
- * Inline back link for project detail pages.
+ * Back link positioned beside the global brand mark.
  */
 export function ProjectDetailNav() {
   return (
-    <motion.section
-      className="pt-20 md:pt-24"
+    <motion.div
+      className="fixed left-[72px] top-2.5 z-[55] sm:left-20 md:top-3 lg:left-[max(7rem,calc((100vw-1100px)/2+90px))]"
       initial={{ y: -10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <Container>
-        <a
-          href={getPath("/#lab")}
-          className="inline-flex items-center gap-2 rounded-full border border-border bg-bg-secondary px-4 py-2 text-sm text-text-secondary transition-colors hover:border-border-hover hover:bg-bg-hover hover:text-text-primary"
-        >
-          <span className="text-brand-light">&larr;</span>
-          返回 Product Lab
-        </a>
-      </Container>
-    </motion.section>
+      <a
+        href={getPath("/#lab")}
+        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-bg-primary/80 px-3 py-1.5 text-xs text-text-secondary shadow-card backdrop-blur-xl transition-colors hover:border-border-hover hover:bg-bg-hover hover:text-text-primary md:px-3.5 md:py-2 md:text-sm"
+      >
+        <span className="text-brand-light">&larr;</span>
+        返回 Product Lab
+      </a>
+    </motion.div>
   );
 }

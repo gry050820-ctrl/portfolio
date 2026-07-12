@@ -18,6 +18,7 @@ export interface ProjectData {
   result: string;
   period: { start: string; end?: string };
   coverIcon: string;
+  resources?: readonly { label: string; href: string; type: "manual" | "download" | "link" }[];
   placeholder?: boolean;
 }
 
@@ -66,8 +67,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <div ref={ref}>
-      <motion.a
-        href={getPath(`/project/${project.slug}`)}
+      <motion.article
         className={cn(
           "group block rounded-lg border border-border bg-bg-secondary p-6 md:p-8",
           "transition-all duration-300 ease-out",
@@ -103,7 +103,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       </div>
 
       {/* Icon + Project name — prominent identity */}
-      <div className="flex items-center gap-3 mb-4">
+      <a href={getPath(`/project/${project.slug}`)} className="flex items-center gap-3 mb-4">
         <span className="text-3xl shrink-0">{project.coverIcon}</span>
         <h3 className="text-xl md:text-2xl font-semibold text-text-primary group-hover:text-brand-light transition-colors leading-tight">
           {project.name}
@@ -111,7 +111,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             →
           </span>
         </h3>
-      </div>
+      </a>
 
       {/* Conflict — the hook */}
       <p className="text-sm text-text-secondary leading-relaxed mb-2">
@@ -147,8 +147,27 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             {project.result}
           </p>
         )}
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a
+            href={getPath(`/project/${project.slug}`)}
+            className="inline-flex items-center rounded-md border border-border px-3 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary"
+          >
+            查看详情
+          </a>
+          {project.resources?.map((resource) => (
+            <a
+              key={resource.href}
+              href={getPath(resource.href)}
+              target={resource.type === "manual" ? "_blank" : undefined}
+              rel={resource.type === "manual" ? "noopener noreferrer" : undefined}
+              className="inline-flex items-center rounded-md bg-brand px-3 py-1.5 text-xs font-medium text-white transition hover:brightness-110"
+            >
+              {resource.label}
+            </a>
+          ))}
+        </div>
       </div>
-      </motion.a>
+      </motion.article>
     </div>
   );
 }
