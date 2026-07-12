@@ -209,22 +209,22 @@ export const siteConfig = {
         ],
       },
       {
-        question: "How can AI search visibility become an analyst workflow?",
+        question: "AI 搜索可见性如何变成一套分析师工作流？",
         projects: [
           {
             slug: "geo-analyst-workspace",
             number: 5,
             name: "GEO Analyst Workspace",
             conflict:
-              "Brands can appear in AI answers without being cited, recommended, or supported by trustworthy evidence. The hard part is turning scattered AI visibility signals into a repeatable analyst workflow.",
+              "品牌可能会被 AI 回答提到，却没有被引用、没有进入推荐位，也缺少可信证据支撑。真正难的不是做一张分数表，而是把分散的 AI 可见性信号变成可复测、可审核、可交付的分析师工作流。",
             motivation:
-              "I built a portfolio-safe dynamic demo that shows the full loop: intake, question pool, website evidence, AI answer review, GEO Score, execution briefs, human QA, retest, and acceptance.",
+              "我做了一个作品集安全版动态 demo，展示从需求录入、问题池、网站证据、AI 回答审核、GEO Score、执行 Brief、人工 QA、复测到验收判断的完整闭环。",
             status: "completed" as const,
-            statusLabel: "Demo ready",
-            role: "Workflow design / Frontend demo / AI evaluation system thinking",
-            tags: ["GEO", "AI Search", "Dashboard", "Workflow"],
+            statusLabel: "Demo 已完成",
+            role: "工作流设计 / 前端演示 / AI 评估体系设计",
+            tags: ["GEO", "AI 搜索", "Dashboard", "工作流"],
             result:
-              "Standalone interactive demo with mock data only; no real backend, customer data, CSV import, or report export capability exposed.",
+              "独立动态演示，只使用前端 mock 数据；不开放真实后端、客户数据、CSV 导入或报告导出能力。",
             period: { start: "2026-07" },
             coverIcon: "GEO",
           },

@@ -2,33 +2,29 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProject, getAllProjectSlugs } from "@/data/projects";
 import { Container } from "@/components/ui/Container";
-import { Badge } from "@/components/ui/Badge";
 import { formatDateRange, getPath } from "@/lib/utils";
 import { ProjectDetailNav } from "./ProjectDetailNav";
 import { ProjectCrossLinks } from "./ProjectCrossLinks";
 import { ProjectResources } from "./ProjectResources";
 
-/* ── Static generation ── */
-
 export function generateStaticParams() {
   return getAllProjectSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}): Metadata {
-  const { slug } = params as unknown as { slug: string };
+}): Promise<Metadata> {
+  const { slug } = await params;
   const project = getProject(slug);
   if (!project) return { title: "项目未找到" };
+
   return {
     title: `${project.name} · 项目详情`,
     description: project.tagline,
   };
 }
-
-/* ── Page ── */
 
 export default async function ProjectPage({
   params,
@@ -41,14 +37,11 @@ export default async function ProjectPage({
 
   return (
     <>
-      {/* Top nav */}
       <ProjectDetailNav />
 
-      {/* Hero banner */}
       <section className="pt-24 pb-16 md:pt-32 md:pb-20">
         <Container>
           <div className="max-w-3xl">
-            {/* Status + Number */}
             <div className="flex items-center gap-3 mb-4">
               <span
                 className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium ${
@@ -71,13 +64,11 @@ export default async function ProjectPage({
               </span>
             </div>
 
-            {/* Name + Tagline */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-4">
               {project.name}
             </h1>
             <p className="text-lg text-text-secondary mb-6">{project.tagline}</p>
 
-            {/* Quick info */}
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-tertiary">
               <span>角色：{project.role}</span>
               <span>时间：{formatDateRange(project.period.start, project.period.end)}</span>
@@ -87,28 +78,29 @@ export default async function ProjectPage({
         </Container>
       </section>
 
-      {/* Divider */}
       <div className="border-t border-border" />
 
-      {/* ── Product Showcase Banner (说明书直达) ── */}
       {project.resources && project.resources.length > 0 && (
         <section className="py-10 md:py-12">
           <Container>
             <div className="max-w-3xl">
               <div className="rounded-lg border border-border-active bg-brand-muted/5 p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <div className="shrink-0 text-2xl">📦</div>
+                <div className="shrink-0 rounded-md border border-border bg-bg-tertiary px-2.5 py-1 text-xs font-mono text-brand-light">
+                  DOC
+                </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-text-primary mb-1">
                     产品交付物
                   </p>
                   <p className="text-xs text-text-tertiary">
-                    不只是案例描述——这里有我实际产出的产品说明书和可交付物。HR 可直接查看。
+                    不只是案例描述，这里放的是我实际产出的产品说明和可交付物，HR 可以直接查看。
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 shrink-0">
                   {project.resources.map((res) => {
                     const isDisabled = res.type === "download" && res.href === "#";
-                    if (isDisabled) return null; // 跳过未就绪的下载链接
+                    if (isDisabled) return null;
+
                     return (
                       <a
                         key={res.label}
@@ -128,8 +120,7 @@ export default async function ProjectPage({
         </section>
       )}
 
-      {/* ── Module 1: Background ── */}
-      <ModuleSection title="📋 背景 & 问题定义">
+      <ModuleSection title="背景 & 问题定义">
         <p className="text-text-secondary leading-relaxed mb-4">
           {project.background.context}
         </p>
@@ -143,8 +134,7 @@ export default async function ProjectPage({
         </p>
       </ModuleSection>
 
-      {/* ── Module 2: Opportunity ── */}
-      <ModuleSection title="💡 Opportunity · 为什么值得做？">
+      <ModuleSection title="Opportunity · 为什么值得做？">
         <div className="space-y-4">
           <InfoBlock label="为什么值得投入？" text={project.opportunity.whyWorthDoing} />
           <InfoBlock label="为什么是现在？" text={project.opportunity.whyNow} />
@@ -152,15 +142,14 @@ export default async function ProjectPage({
         </div>
       </ModuleSection>
 
-      {/* ── Module 3: Thinking Process ── */}
-      <ModuleSection title="🧠 思考过程 & 决策">
+      <ModuleSection title="思考过程 & 决策">
         <p className="text-sm text-text-secondary mb-4">
-          面对这个问题，我考虑了以下方向：
+          面对这个问题，我考虑过以下方向：
         </p>
         <ul className="space-y-2 mb-6">
           {project.thinking.directions.map((d, i) => (
             <li
-              key={i}
+              key={d}
               className={`text-sm px-4 py-3 rounded-md border ${
                 i === 0
                   ? "border-border bg-bg-secondary text-text-secondary"
@@ -170,15 +159,15 @@ export default async function ProjectPage({
               {d}
               {i === 1 && (
                 <span className="ml-2 text-xs text-brand-light font-medium">
-                  ← 我的选择
+                  → 我的选择
                 </span>
               )}
             </li>
           ))}
         </ul>
         <div className="space-y-3">
-          {project.thinking.keyDecisions.map((kd, i) => (
-            <div key={i} className="border border-border rounded-lg p-4 bg-bg-secondary">
+          {project.thinking.keyDecisions.map((kd) => (
+            <div key={kd.point} className="border border-border rounded-lg p-4 bg-bg-secondary">
               <p className="text-sm font-medium text-text-primary mb-1">{kd.point}</p>
               <p className="text-xs text-text-tertiary">{kd.detail}</p>
             </div>
@@ -186,8 +175,7 @@ export default async function ProjectPage({
         </div>
       </ModuleSection>
 
-      {/* ── Module 4: Execution ── */}
-      <ModuleSection title="🔨 执行方案">
+      <ModuleSection title="执行方案">
         <InfoBlock label="MVP 是什么？" text={project.execution.mvp} />
         <div className="mt-4">
           <InfoBlock label="AI 如何加速？" text={project.execution.aiAcceleration} />
@@ -195,9 +183,9 @@ export default async function ProjectPage({
         <div className="mt-4">
           <p className="text-sm font-medium text-text-secondary mb-2">关键节点</p>
           <ul className="space-y-1.5">
-            {project.execution.milestones.map((m, i) => (
-              <li key={i} className="text-sm text-text-tertiary flex items-start gap-2">
-                <span className="text-brand-light shrink-0 mt-0.5">•</span>
+            {project.execution.milestones.map((m) => (
+              <li key={m} className="text-sm text-text-tertiary flex items-start gap-2">
+                <span className="text-brand-light shrink-0 mt-0.5">-</span>
                 {m}
               </li>
             ))}
@@ -205,14 +193,13 @@ export default async function ProjectPage({
         </div>
       </ModuleSection>
 
-      {/* ── Module 5: Trade-off ── */}
-      <ModuleSection title="⚖️ Trade-off · 关键取舍">
+      <ModuleSection title="Trade-off · 关键取舍">
         <p className="text-sm text-text-secondary mb-6">
-          做产品每天都在做取舍。以下是我在这个项目中面对的关键决策：
+          做产品每天都在做取舍。以下是我在这个项目里面对的关键决策：
         </p>
         <div className="space-y-4">
-          {project.tradeoffs.map((t, i) => (
-            <div key={i} className="border border-border rounded-lg p-5 bg-bg-secondary">
+          {project.tradeoffs.map((t) => (
+            <div key={t.decision} className="border border-border rounded-lg p-5 bg-bg-secondary">
               <p className="text-sm font-semibold text-text-primary mb-3">{t.decision}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                 <div
@@ -223,7 +210,7 @@ export default async function ProjectPage({
                   }`}
                 >
                   <p className="font-medium text-text-secondary mb-0.5">
-                    方案 A{t.chosen === "A" ? " ← 我的选择" : ""}
+                    方案 A{t.chosen === "A" ? " → 我的选择" : ""}
                   </p>
                   <p className="text-text-tertiary">{t.optionA}</p>
                 </div>
@@ -235,7 +222,7 @@ export default async function ProjectPage({
                   }`}
                 >
                   <p className="font-medium text-text-secondary mb-0.5">
-                    方案 B{t.chosen === "B" ? " ← 我的选择" : ""}
+                    方案 B{t.chosen === "B" ? " → 我的选择" : ""}
                   </p>
                   <p className="text-text-tertiary">{t.optionB}</p>
                 </div>
@@ -249,8 +236,7 @@ export default async function ProjectPage({
         </div>
       </ModuleSection>
 
-      {/* ── Module 6: AI Practice ── */}
-      <ModuleSection title="🤖 AI 实践 & 工具链">
+      <ModuleSection title="AI 实践 & 工具链">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
           {project.aiPractice.toolsUsed.map((tool) => (
             <div key={tool.name} className="border border-border rounded-md p-3 bg-bg-secondary">
@@ -261,25 +247,24 @@ export default async function ProjectPage({
         </div>
         <div className="border border-border rounded-lg p-5 bg-bg-secondary space-y-3">
           <div>
-            <p className="text-xs font-medium text-brand-light mb-1">🤖 AI 做了什么</p>
+            <p className="text-xs font-medium text-brand-light mb-1">AI 做了什么？</p>
             <p className="text-sm text-text-secondary">{project.aiPractice.aiContribution}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-text-primary mb-1">🧑 我做了什么</p>
+            <p className="text-xs font-medium text-text-primary mb-1">我做了什么？</p>
             <p className="text-sm text-text-secondary">{project.aiPractice.myContribution}</p>
           </div>
         </div>
       </ModuleSection>
 
-      {/* ── Module 7: Impact ── */}
-      <ModuleSection title="📊 Impact · 产生了什么影响？">
+      <ModuleSection title="Impact · 产生了什么影响？">
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium text-text-secondary mb-2">量化结果</p>
             <ul className="space-y-1.5">
-              {project.impact.quantitative.map((q, i) => (
-                <li key={i} className="text-sm text-text-tertiary flex items-start gap-2">
-                  <span className="text-brand-light shrink-0">•</span>
+              {project.impact.quantitative.map((q) => (
+                <li key={q} className="text-sm text-text-tertiary flex items-start gap-2">
+                  <span className="text-brand-light shrink-0">-</span>
                   {q}
                 </li>
               ))}
@@ -291,7 +276,7 @@ export default async function ProjectPage({
                 &ldquo;{project.impact.userQuote.text}&rdquo;
               </p>
               <p className="text-xs text-text-tertiary mt-1">
-                —— {project.impact.userQuote.author}，{project.impact.userQuote.date}
+                -- {project.impact.userQuote.author}，{project.impact.userQuote.date}
               </p>
             </div>
           )}
@@ -299,14 +284,13 @@ export default async function ProjectPage({
         </div>
       </ModuleSection>
 
-      {/* ── Module 8: Reflection ── */}
-      <ModuleSection title="💭 复盘与反思">
+      <ModuleSection title="复盘与反思">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="border border-border rounded-lg p-5 bg-bg-secondary">
-            <p className="text-sm font-medium text-emerald-400 mb-2">✅ 做对了什么</p>
+            <p className="text-sm font-medium text-emerald-400 mb-2">做对了什么？</p>
             <ul className="space-y-1.5">
-              {project.reflection.didWell.map((item, i) => (
-                <li key={i} className="text-sm text-text-secondary flex items-start gap-2">
+              {project.reflection.didWell.map((item) => (
+                <li key={item} className="text-sm text-text-secondary flex items-start gap-2">
                   <span className="text-emerald-400/60 shrink-0">+</span>
                   {item}
                 </li>
@@ -314,11 +298,11 @@ export default async function ProjectPage({
             </ul>
           </div>
           <div className="border border-border rounded-lg p-5 bg-bg-secondary">
-            <p className="text-sm font-medium text-amber-400 mb-2">⚠️ 可以做得更好</p>
+            <p className="text-sm font-medium text-amber-400 mb-2">可以做得更好</p>
             <ul className="space-y-1.5">
-              {project.reflection.couldImprove.map((item, i) => (
-                <li key={i} className="text-sm text-text-secondary flex items-start gap-2">
-                  <span className="text-amber-400/60 shrink-0">∆</span>
+              {project.reflection.couldImprove.map((item) => (
+                <li key={item} className="text-sm text-text-secondary flex items-start gap-2">
+                  <span className="text-amber-400/60 shrink-0">-</span>
                   {item}
                 </li>
               ))}
@@ -331,8 +315,7 @@ export default async function ProjectPage({
         </div>
       </ModuleSection>
 
-      {/* ── Module 9: Next Iteration ── */}
-      <ModuleSection title="🔮 如果重新做一次">
+      <ModuleSection title="如果重新做一次">
         <div className="space-y-4">
           <InfoBlock label="我会怎么改？" text={project.nextIteration.whatWouldChange} />
           <InfoBlock label="早期应该避免的坑" text={project.nextIteration.pitfallsToAvoid} />
@@ -340,10 +323,8 @@ export default async function ProjectPage({
         </div>
       </ModuleSection>
 
-      {/* ── Resources (optional) ── */}
       {project.resources && <ProjectResources resources={project.resources} />}
 
-      {/* ── Takeaway ── */}
       <section className="py-16 md:py-20">
         <Container>
           <div className="max-w-3xl border border-border-active rounded-lg p-6 bg-brand-muted/10">
@@ -357,7 +338,6 @@ export default async function ProjectPage({
         </Container>
       </section>
 
-      {/* ── Cross-links ── */}
       <ProjectCrossLinks
         byCapability={project.relatedByCapability}
         byPractice={project.relatedByPractice}
@@ -365,8 +345,6 @@ export default async function ProjectPage({
     </>
   );
 }
-
-/* ── Helpers ── */
 
 function ModuleSection({
   title,

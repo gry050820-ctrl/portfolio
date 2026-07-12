@@ -250,146 +250,142 @@ export const projects: ProjectDetail[] = [
     slug: "geo-analyst-workspace",
     number: 5,
     name: "GEO Analyst Workspace",
-    tagline: "A portfolio-safe dynamic demo for AI search visibility analysis.",
+    tagline: "面向 AI 搜索可见性分析的作品集安全版动态演示。",
     status: "completed",
-    statusLabel: "Demo ready",
+    statusLabel: "Demo 已完成",
 
-    role: "Workflow design / Frontend demo / AI evaluation system thinking",
+    role: "工作流设计 / 前端演示 / AI 评估体系设计",
     period: { start: "2026-07" },
-    tools: ["React", "Vite", "Tailwind", "TypeScript", "GEO workflow design"],
+    tools: ["React", "Vite", "Tailwind", "TypeScript", "GEO 工作流设计"],
 
     background: {
       context:
-        "Generative Engine Optimization work is not just a scorecard problem. A useful analyst workspace has to connect customer context, AI answer evidence, website citation readiness, review status, execution briefs, retest comparison, and acceptance logic.",
+        "GEO 不只是算一个分数。真正有价值的分析师工作台，需要把客户背景、AI 回答证据、网站引用准备度、人工审核状态、执行 Brief、复测对比和验收判断连接起来。",
       userProblem:
-        "For HR and interviewers, I needed to show the product and workflow thinking behind a full GEO system without exposing a real business tool, client data, SQLite storage, provider logic, CSV import, or report export capability.",
+        "我需要向 HR 和面试官展示完整 GEO 系统背后的产品与工作流思考，但不能公开真实业务工具、客户数据、SQLite、供应商逻辑、CSV 导入或报告导出能力。",
       whyExistingSolutionsFail:
-        "A static screenshot is too shallow, but publishing the actual internal tool would expose too much operational capability. The demo needed to feel dynamic while staying safely front-end-only.",
+        "单纯静态截图太浅，公开真实内部工具又会暴露太多可操作能力。所以这个 demo 必须看起来足够动态，同时本质上保持前端 mock，不能变成可直接接单用的工具。",
     },
 
     opportunity: {
       whyWorthDoing:
-        "This project shows that I can design the full operating loop around an AI evaluation workflow, not just build isolated pages or scripts.",
+        "这个项目能证明我不是只会做页面或脚本，而是能围绕 AI 评估场景设计完整的业务闭环。",
       whyNow:
-        "AI search visibility is becoming a real business concern, but many teams still lack a structured way to turn AI answer evidence into reviewable actions and measurable retests.",
+        "AI 搜索可见性正在变成真实业务问题，但很多团队还缺少一套把 AI 回答证据转成可审核动作、可复测结果和可交付报告的流程。",
       myJudgment:
-        "I chose a portfolio-safe dynamic demo: interactive enough to communicate product ability, but deliberately unable to perform real customer work.",
+        "我选择做作品集安全版动态 demo：足够互动，能体现产品能力；同时刻意不开放真实业务能力。",
     },
 
     thinking: {
       directions: [
-        "Publish a static case study page with screenshots and report excerpts.",
-        "Build a front-end-only dynamic demo with mock state, dashboard interactions, report tabs, and architecture walkthrough.",
-        "Expose a limited version of the real internal Python web tool.",
+        "做一个静态 case study 页面，只放截图和报告片段。",
+        "做一个前端动态 demo，用 mock 状态、Dashboard 交互、报告切换和架构展示来模拟真实工作台。",
+        "开放一部分真实 Python 内部 Web 工具。",
       ],
-      chosenDirection: "Front-end-only dynamic demo",
+      chosenDirection: "前端动态 demo",
       keyDecisions: [
         {
-          point: "Why not expose the real tool?",
+          point: "为什么不公开真实工具？",
           detail:
-            "The goal is portfolio demonstration, not public product access. Real project creation, CSV import, provider workflows, SQLite data, and report export would make the repository too operational.",
+            "目标是作品集展示，不是产品开放。真实项目创建、CSV 导入、供应商流程、SQLite 数据和报告导出都会让公开仓库过于业务化。",
         },
         {
-          point: "Why use a fake ecommerce case?",
+          point: "为什么使用假电商案例？",
           detail:
-            "A synthetic Chinese ecommerce brand, Qimu Select, makes the case concrete while avoiding real customer data and confidential business rules.",
+            "使用虚构国内电商品牌「栖木优选」，可以让案例足够具体，同时避免真实客户数据和分析规则泄露。",
         },
       ],
     },
 
     execution: {
       mvp:
-        "A standalone Vite React demo with dynamic dashboard views, competitor filtering, evidence QA cards, report section switching, and an architecture selector.",
+        "一个独立 Vite React demo，包含动态 dashboard 视图、竞品筛选、Evidence QA 卡片、报告章节切换和架构阶段选择。",
       aiAcceleration:
-        "AI helped turn the real GEO workflow into a public-safe narrative, generate mock evidence/report copy, and iterate quickly on the frontend structure and visual direction.",
+        "AI 帮我把真实 GEO 工作流转译成公开安全的产品叙事，生成 mock 证据/报告文案，并快速迭代前端结构和视觉方向。",
       milestones: [
-        "Defined public safety boundaries: no backend, no import, no export, no real analysis rules.",
-        "Built the standalone demo under showcase-demo with mock data only.",
-        "Adjusted the visual palette to match the portfolio UI direction.",
-        "Packaged the built demo as static assets under public/demos/geo-analyst for GitHub Pages deployment.",
+        "定义公开安全边界：无后端、无导入、无导出、无真实分析规则。",
+        "在 showcase-demo 下构建独立动态演示，只使用 mock 数据。",
+        "调整视觉配色，使其和作品集 UI 保持一致。",
+        "将构建产物作为静态资源放到 public/demos/geo-analyst，适配 GitHub Pages 部署。",
       ],
     },
 
     tradeoffs: [
       {
-        decision: "Integration method",
-        optionA: "Rewrite the demo as native Next.js components inside the portfolio.",
-        optionB: "Embed the built standalone demo as static assets and link to it from the portfolio project detail.",
+        decision: "集成方式",
+        optionA: "把 demo 重写成作品集内的原生 Next.js 组件。",
+        optionB: "把独立 demo 构建成静态资源，并从作品集项目详情页链接过去。",
         chosen: "B",
         reason:
-          "Static asset embedding keeps the existing portfolio architecture stable and avoids mixing Vite/Tailwind demo dependencies into the Next.js app.",
+          "静态资源嵌入能保持现有作品集架构稳定，也避免把 Vite/Tailwind demo 的依赖混进 Next.js 项目。",
       },
       {
-        decision: "Demo realism",
-        optionA: "Make buttons look fully operational.",
-        optionB: "Keep interactions limited to safe UI state changes and preview tabs.",
+        decision: "演示真实感",
+        optionA: "让按钮看起来都像真实可操作。",
+        optionB: "只保留安全的 UI 状态切换和预览交互。",
         chosen: "B",
-        reason:
-          "The demo should communicate capability without letting viewers treat it as a usable business tool.",
+        reason: "demo 应该传达能力，而不是让访客把它当作真实业务工具使用。",
       },
     ],
 
     aiPractice: {
       toolsUsed: [
-        { name: "Codex", purpose: "Frontend implementation, repo inspection, and integration planning" },
-        { name: "React", purpose: "Interactive mock workspace UI" },
-        { name: "Tailwind", purpose: "Portfolio-aligned visual system" },
-        { name: "GitHub Pages", purpose: "Static deployment target" },
+        { name: "Codex", purpose: "前端实现、仓库检查和集成规划" },
+        { name: "React", purpose: "构建交互式 mock 工作台" },
+        { name: "Tailwind", purpose: "对齐作品集视觉系统" },
+        { name: "GitHub Pages", purpose: "静态部署目标" },
       ],
       aiContribution:
-        "AI accelerated the conversion from internal workflow knowledge into a safe public demo, generated implementation scaffolding, and helped validate build/deployment constraints.",
+        "AI 加速了从内部工作流到公开 demo 的转译，辅助生成脚手架、mock 文案和部署方案。",
       myContribution:
-        "I defined the business boundary, decided what must remain private, selected the case framing, and reviewed the demo as a portfolio artifact instead of an operational product.",
+        "我定义业务边界，决定哪些能力必须隐藏，选择案例叙事，并把 demo 当作作品集资产而不是运营产品来审查。",
     },
 
     impact: {
       quantitative: [
-        "1 standalone dynamic demo packaged as static assets.",
-        "5 public sections: overview, case study, dashboard, report preview, and architecture.",
-        "0 real backend endpoints, imports, exports, customer datasets, or provider integrations exposed.",
+        "1 个可独立访问的动态演示。",
+        "5 个公开展示模块：首页、案例、Dashboard、报告预览和架构。",
+        "0 个真实后端接口、导入导出、客户数据集或供应商集成被暴露。",
       ],
       longTerm:
-        "The project turns a private GEO workflow into an interview-safe artifact that demonstrates product thinking, workflow design, and AI evaluation judgment.",
+        "这个项目把私有 GEO 工作流转成了面试安全的展示资产，体现产品思维、工作流设计和 AI 评估判断。",
     },
 
     reflection: {
       didWell: [
-        "Separated portfolio demonstration from real business capability.",
-        "Used a concrete synthetic case instead of vague mock content.",
-        "Kept the demo dynamic enough to show product thinking without exposing operational functions.",
+        "把作品集展示和真实业务能力明确分离。",
+        "使用具体的虚构案例，而不是空泛 mock。",
+        "保持足够动态，同时不暴露运营功能。",
       ],
       couldImprove: [
-        "Later, the standalone demo can be rewritten as native Next.js components for tighter design consistency.",
-        "The portfolio copy can be localized more carefully once the overall project ordering is finalized.",
+        "后续可以把独立 demo 重写为原生 Next.js 组件，让视觉一致性更高。",
+        "等作品集整体项目顺序稳定后，可以进一步打磨中文叙事。",
       ],
       biggestLesson:
-        "A strong portfolio demo is not the same as a public product. The right artifact shows judgment about what to reveal and what to deliberately withhold.",
+        "强作品集 demo 不等于公开产品。好的展示应该让人看到判断力：哪些值得展示，哪些必须克制。",
     },
 
     nextIteration: {
       whatWouldChange:
-        "I would add a short walkthrough video or annotated screenshots so reviewers can understand the demo even if they do not click through every tab.",
+        "我会补一个短 walkthrough 视频或带标注截图，让面试官不用逐个点 tab 也能快速理解。",
       pitfallsToAvoid:
-        "Do not connect the public demo to real backend workflows just to make it feel more impressive. That would weaken the safety boundary.",
+        "不要为了显得更真实而把公开 demo 接到真实后端，这会破坏安全边界。",
       nextExploration:
-        "Explore a native Next.js version of the dashboard preview once the portfolio information architecture is stable.",
+        "等作品集信息架构稳定后，可以探索把 Dashboard Preview 改成原生 Next.js 页面。",
     },
 
     resources: [
-      { label: "Open dynamic demo", href: "/demos/geo-analyst/index.html", type: "manual" },
-      { label: "Source repository", href: "https://github.com/gry050820-ctrl/portfolio", type: "link" },
+      { label: "打开动态演示", href: "/demos/geo-analyst/index.html", type: "manual" },
+      { label: "源码仓库", href: "https://github.com/gry050820-ctrl/portfolio", type: "link" },
     ],
-
-    takeaway:
-      "The best public demo shows the shape of the thinking without giving away the private machine underneath.",
-
+    takeaway: "最好的公开 demo，是让人看见你的思考形状，但不会把私有机器交出去。",
     relatedByCapability: [
-      { label: "AI practice / Claude Code automation", slug: "claude-code" },
-      { label: "Execution / AI product operations", slug: "internship" },
+      { label: "AI 实践 / Claude Code 自动化", slug: "claude-code" },
+      { label: "执行落地 / AI 产品运营", slug: "internship" },
     ],
     relatedByPractice: [
-      { label: "Automation workflow / Video pipeline", slug: "video-pipeline" },
-      { label: "Product packaging / AI USB", slug: "ai-usb" },
+      { label: "自动化工作流 / 视频流水线", slug: "video-pipeline" },
+      { label: "产品包装 / AI U 盘", slug: "ai-usb" },
     ],
   },
 ];
