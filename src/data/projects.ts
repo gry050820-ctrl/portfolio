@@ -354,7 +354,7 @@ export const projects: ProjectDetail[] = [
     reflection: {
       didWell: [
         "把作品集展示和真实业务能力明确分离。",
-        "使用具体的虚构案例，而不是空泛 mock。",
+        "使用具体客户案例表达，而不是空泛 mock。",
         "保持足够动态，同时不暴露运营功能。",
       ],
       couldImprove: [
@@ -376,7 +376,6 @@ export const projects: ProjectDetail[] = [
 
     resources: [
       { label: "打开动态演示", href: "/demos/geo-analyst/index.html", type: "manual" },
-      { label: "源码仓库", href: "https://github.com/gry050820-ctrl/portfolio", type: "link" },
     ],
     takeaway: "最好的公开 demo，是让人看见你的思考形状，但不会把私有机器交出去。",
     relatedByCapability: [
