@@ -218,17 +218,17 @@ export const siteConfig = {
             conflict:
               "品牌可能会被 AI 回答提到，却没有被引用、没有进入推荐位，也缺少可信证据支撑。真正难的不是做一张分数表，而是把分散的 AI 可见性信号变成可复测、可审核、可交付的分析师工作流。",
             motivation:
-              "我做了一个作品集安全版动态 demo，展示从需求录入、问题池、网站证据、AI 回答审核、GEO Score、执行 Brief、人工 QA、复测到验收判断的完整闭环。",
+              "我以广州融兴纸品为实战对象，完成问题池设计、三平台 AI 基线采集、公开内容分发、180 条长尾问题复测和成果报告。",
             status: "completed" as const,
-            statusLabel: "Demo 已完成",
-            role: "工作流设计 / 前端演示 / AI 评估体系设计",
+            statusLabel: "项目已完成",
+            role: "GEO 项目运营 / 内容分发 / AI 复测分析",
             tags: ["GEO", "AI 搜索", "Dashboard", "工作流"],
             result:
-              "独立动态演示，只使用前端 mock 数据；不开放真实后端、客户数据、CSV 导入或报告导出能力。",
+              "180 条独立回答中区域长尾提及率达 23.9%；“花都炭步镇纸箱和彩盒厂家”达 93.3%，并在 DeepSeek、豆包和元宝均出现。",
             period: { start: "2026-07" },
             coverIcon: "GEO",
             resources: [
-              { label: "查看动态演示", href: "/demos/geo-analyst/index.html", type: "manual" as const },
+              { label: "查看 GEO 项目成果报告", href: "/reports/rongxing-geo-project-report.html", type: "manual" as const },
             ],
           },
         ],
