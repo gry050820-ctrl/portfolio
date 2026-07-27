@@ -87,7 +87,7 @@ export interface ProjectDetail {
   };
 
   /* Resources */
-  resources?: Array<{ label: string; href: string; type: "manual" | "download" | "link" }>;
+  resources?: Array<{ label: string; href: string; type: "manual" | "download" | "link" | "video" }>;
 
   /* Takeaway */
   takeaway: string;
