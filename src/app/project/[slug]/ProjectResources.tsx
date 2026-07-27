@@ -5,7 +5,7 @@ import { siteConfig } from "@/data/site.config";
 interface Resource {
   label: string;
   href: string;
-  type: "manual" | "download" | "link";
+  type: "manual" | "download" | "link" | "video";
 }
 
 interface ProjectResourcesProps {
@@ -29,6 +29,20 @@ export function ProjectResources({ resources }: ProjectResourcesProps) {
           <div className="flex flex-wrap gap-3">
             {resources.map((res) => {
               const isDisabled = res.type === "download" && res.href === "#";
+
+              if (res.type === "video") {
+                return (
+                  <div key={res.label} className="w-full space-y-3">
+                    <p className="text-sm font-medium text-text-primary">{res.label}</p>
+                    <video
+                      controls
+                      preload="metadata"
+                      className="w-full rounded-lg border border-border bg-black"
+                      src={`${siteConfig.basePath}${res.href}`}
+                    />
+                  </div>
+                );
+              }
 
               return (
                 <a

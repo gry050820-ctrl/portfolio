@@ -387,6 +387,73 @@ export const projects: ProjectDetail[] = [
       { label: "产品包装 / AI U 盘", slug: "ai-usb" },
     ],
   },
+  {
+    slug: "video-pipeline",
+    number: 2,
+    name: "AI 视频工厂",
+    tagline: "把一次性的视频处理，重构成可审核、可恢复、可复用的内容生产系统",
+    status: "iterating",
+    statusLabel: "持续迭代",
+    role: "工作流设计 · Agent 编排 · 媒体管线搭建",
+    period: { start: "2026-06" },
+    tools: ["Claude Code", "Python", "FFmpeg", "Edge-TTS", "剪映"],
+    background: {
+      context: "短视频制作并不只是把素材拼成 MP4。脚本、画面、旁白、字幕、时长和人工判断彼此牵连，任何一个环节漂移，最终交付就会失真。",
+      userProblem: "内容生产者需要反复处理分镜、配音、字幕、格式转换和剪辑导出，时间花在重复操作上，却很难稳定复用一套可靠流程。",
+      whyExistingSolutionsFail: "单个脚本只能解决一个局部动作；纯自动化又容易掩盖事实错误、时长漂移和素材缺失。真正需要的是带审核点的生产系统。",
+    },
+    opportunity: {
+      whyWorthDoing: "把内容生产从‘靠记忆和手工操作’变成可追踪的项目流程，才能在保持内容判断的同时，降低重复劳动。",
+      whyNow: "生成式 AI、TTS 和桌面剪辑工具已经足够成熟，瓶颈从‘能不能生成’转向‘如何把生成结果组织成可信交付’。",
+      myJudgment: "不把剪映或 FFmpeg 当成产品本身，而是先建立稳定的内容模型、唯一时间线和人工审核机制，再接入不同导出后端。",
+    },
+    thinking: {
+      directions: ["方案 A：继续堆叠脚本，让每个阶段分别调用一个工具", "方案 B：建立结构化项目和唯一时间线，再把媒体工具做成可替换适配器"],
+      chosenDirection: "方案 B",
+      keyDecisions: [
+        { point: "为什么不让剪映定义系统？", detail: "剪映适合作为人工精修和交付后端，但核心项目数据必须独立存在，否则版本、审核和恢复都会被桌面软件格式绑住。" },
+        { point: "为什么把真实音频时长放到时间线之前？", detail: "旁白的实际时长决定镜头和字幕边界，先估算再修正会产生画面、字幕和声音的漂移。" },
+      ],
+    },
+    execution: {
+      mvp: "输入一个主题，生成结构化脚本、镜头素材、真实 TTS、唯一时间线和可预览成片；用户在脚本、素材和成片三个节点确认后再交付。",
+      aiAcceleration: "Claude Code 辅助工作流和代码搭建，Edge-TTS 生成旁白，FFmpeg 负责可重复渲染，剪映适配器负责可选的人工编辑交付。",
+      milestones: ["建立脚本、素材、旁白、时间线和审核状态的中间表示", "用真实音频时长驱动字幕、镜头和最终渲染", "同时保留 FFmpeg 成片和剪映草稿两种交付方式", "将失败、降级和重试记录为可追溯的项目状态"],
+    },
+    tradeoffs: [
+      { decision: "核心架构", optionA: "围绕 FFmpeg 命令串联脚本", optionB: "围绕内容项目和时间线编排工具", chosen: "B", reason: "前者启动快，但难以支持版本、审核和多后端；后者更适合长期复用。" },
+      { decision: "交付方式", optionA: "只输出最终 MP4", optionB: "同时输出 MP4、字幕和可编辑剪辑草稿", chosen: "B", reason: "成片适合发布，草稿适合人工精修，两者服务不同的交付场景。" },
+    ],
+    aiPractice: {
+      toolsUsed: [
+        { name: "Claude Code", purpose: "工作流建模、脚本搭建和自动化排错" },
+        { name: "Python", purpose: "阶段编排、状态管理和媒体元数据处理" },
+        { name: "FFmpeg", purpose: "可重复的视频合成、字幕和格式输出" },
+        { name: "Edge-TTS", purpose: "按镜头生成可测量时长的中文旁白" },
+        { name: "剪映", purpose: "作为可选的人工精修和草稿交付后端" },
+      ],
+      aiContribution: "AI 负责生成脚本初稿、视觉提示词、配音和部分工程代码，加速重复性生产工作。",
+      myContribution: "我负责定义受众和内容边界、选择工作流结构、审核生成结果，并决定哪些环节必须保留人工判断。",
+    },
+    impact: {
+      quantitative: ["已完成一条约 45 秒的 AI 工具教学短视频交付", "产出脚本、镜头素材、6 段旁白、时间线、字幕、MP4 和剪映草稿", "同一项目支持 FFmpeg 成片和剪映可编辑草稿两种交付路径"],
+      longTerm: "项目验证了‘内容模型 + 人工审核 + 可替换媒体后端’比单纯堆叠生成工具更适合长期内容生产。",
+    },
+    reflection: {
+      didWell: ["把脚本、素材、配音、时间线和导出拆成可检查的阶段", "保留了可恢复的状态记录和剪映降级路径", "用真实产物验证了从主题到可播放视频的完整链路"],
+      couldImprove: ["当前实现仍有硬编码路径和工具版本，跨环境复用成本较高", "时间线修正应该前置到真实音频生成之后", "还需要把阶段布尔状态升级为绑定版本和产物的审核记录"],
+      biggestLesson: "自动化视频系统的核心不是‘生成更多素材’，而是让内容判断、时间线和交付状态始终可见、可复核、可恢复。",
+    },
+    nextIteration: {
+      whatWouldChange: "将项目重构为结构化内容项目：统一管理脚本、镜头、素材、时间线、审核版本和交付物。",
+      pitfallsToAvoid: "避免让剪映格式、估算时长或静默降级定义系统行为；所有失败和降级都必须显式记录。",
+      nextExploration: "把同一套编排器扩展到批量视频、不同 TTS 引擎和更多导出后端。",
+    },
+    resources: [{ label: "观看项目成片", href: "/projects/ai-video/final.mp4", type: "video" }],
+    takeaway: "把 AI 生成能力变成真正可交付的内容系统，关键不在于少写几个命令，而在于建立可信的时间线、审核点和产物链。",
+    relatedByCapability: [{ label: "AI 实践 · Agent 编排", slug: "claude-code" }, { label: "执行落地 · 完整交付", slug: "ai-usb" }],
+    relatedByPractice: [{ label: "AI U 盘 · 一键部署", slug: "ai-usb" }, { label: "Claude Code · 自动化实践", slug: "claude-code" }],
+  },
 ];
 
 /**
