@@ -123,11 +123,36 @@ export const siteConfig = {
   lab: {
     explorations: [
       {
+        question: "AI 搜索可见性如何变成一套分析师工作流？",
+        projects: [
+          {
+            slug: "geo-analyst-workspace",
+            number: 1,
+            name: "GEO Analyst Workspace",
+            conflict:
+              "品牌可能会被 AI 回答提到，却没有被引用、没有进入推荐位，也缺少可信证据支撑。真正难的不是做一张分数表，而是把分散的 AI 可见性信号变成可复测、可审核、可交付的分析师工作流。",
+            motivation:
+              "我以广州融兴纸品为实战对象，完成问题池设计、三平台 AI 基线采集、公开内容分发、180 条长尾问题复测和成果报告。",
+            status: "completed" as const,
+            statusLabel: "项目已完成",
+            role: "GEO 项目运营 / 内容分发 / AI 复测分析",
+            tags: ["GEO", "AI 搜索", "Dashboard", "工作流"],
+            result:
+              "180 条独立回答中区域长尾提及率达 23.9%；“花都炭步镇纸箱和彩盒厂家”达 93.3%，并在 DeepSeek、豆包和元宝均出现。",
+            period: { start: "2026-07" },
+            coverIcon: "GEO",
+            resources: [
+              { label: "查看 GEO 项目成果报告", href: "/reports/rongxing-geo-project-report.html", type: "manual" as const },
+            ],
+          },
+        ],
+      },
+      {
         question: "AI 如何提升个人学习效率？",
         projects: [
           {
             slug: "ai-usb",
-            number: 1,
+            number: 2,
             name: "AI U 盘",
             conflict: "新手想用 AI 编程，第一步就卡在环境配置——装 Python、配 CUDA、处理依赖冲突，动辄折腾几小时，很多人直接放弃。",
             motivation: "我做了一个一键部署的 AI 编程环境。插上 U 盘，5 分钟就能开始写代码——不用配环境、不看报错、不需要任何计算机基础。",
@@ -146,7 +171,7 @@ export const siteConfig = {
         projects: [
           {
             slug: "video-pipeline",
-            number: 2,
+            number: 3,
             name: "AI 自动视频流水线",
             conflict: "内容创作者每周花 8-12 小时在重复性的视频处理上——剪辑、字幕、格式转换。这些工作机械但不可或缺。",
             motivation: "我搭建了一套 AI Agent 工作流，把视频处理从手工操作变成自动化流水线。",
@@ -180,7 +205,7 @@ export const siteConfig = {
         projects: [
           {
             slug: "claude-code",
-            number: 3,
+            number: 4,
             name: "Claude Code 自动化实践",
             conflict: "产品工作中存在大量重复性任务——PRD 初稿、竞品信息整理、用户反馈分类。这些任务不复杂，但积累起来消耗大量精力。",
             motivation: "我用 Claude Code 搭建了多个自动化工作流，把重复劳动交给 Agent，把判断留给自己。",
@@ -194,7 +219,7 @@ export const siteConfig = {
           },
           {
             slug: "internship",
-            number: 4,
+            number: 5,
             name: "实习项目 · AI 产品运营",
             conflict: "企业内部 AI 产品面临用户激活率低的问题——用户注册后不知道 AI 能帮他们解决什么具体问题。",
             motivation: "我主导了用户激活链路的重设计，从'展示功能'改为'展示 AI 能帮你完成的具体任务'。",
@@ -205,31 +230,6 @@ export const siteConfig = {
             result: "长短期班招生 2,500+ 人，季度 GMV 目标达成",
             period: { start: "2025-05", end: "2025-08" },
             coverIcon: "💼",
-          },
-        ],
-      },
-      {
-        question: "AI 搜索可见性如何变成一套分析师工作流？",
-        projects: [
-          {
-            slug: "geo-analyst-workspace",
-            number: 5,
-            name: "GEO Analyst Workspace",
-            conflict:
-              "品牌可能会被 AI 回答提到，却没有被引用、没有进入推荐位，也缺少可信证据支撑。真正难的不是做一张分数表，而是把分散的 AI 可见性信号变成可复测、可审核、可交付的分析师工作流。",
-            motivation:
-              "我以广州融兴纸品为实战对象，完成问题池设计、三平台 AI 基线采集、公开内容分发、180 条长尾问题复测和成果报告。",
-            status: "completed" as const,
-            statusLabel: "项目已完成",
-            role: "GEO 项目运营 / 内容分发 / AI 复测分析",
-            tags: ["GEO", "AI 搜索", "Dashboard", "工作流"],
-            result:
-              "180 条独立回答中区域长尾提及率达 23.9%；“花都炭步镇纸箱和彩盒厂家”达 93.3%，并在 DeepSeek、豆包和元宝均出现。",
-            period: { start: "2026-07" },
-            coverIcon: "GEO",
-            resources: [
-              { label: "查看 GEO 项目成果报告", href: "/reports/rongxing-geo-project-report.html", type: "manual" as const },
-            ],
           },
         ],
       },

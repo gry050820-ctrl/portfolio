@@ -100,7 +100,7 @@ export interface ProjectDetail {
 export const projects: ProjectDetail[] = [
   {
     slug: "ai-usb",
-    number: 1,
+    number: 2,
     name: "AI U 盘",
     tagline: "让 AI 编程，从 5 分钟开始",
     status: "completed",
@@ -248,7 +248,7 @@ export const projects: ProjectDetail[] = [
   },
   {
     slug: "geo-analyst-workspace",
-    number: 5,
+    number: 1,
     name: "GEO Analyst Workspace",
     tagline: "广州融兴纸品 GEO 实战：从基线诊断、内容分发到三平台复测的完整闭环。",
     status: "completed",
