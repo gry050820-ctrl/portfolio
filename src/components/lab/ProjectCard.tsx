@@ -69,7 +69,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     <div ref={ref}>
       <motion.article
         className={cn(
-          "group block rounded-lg border border-border bg-bg-secondary p-6 md:p-8",
+          "group relative block cursor-pointer rounded-lg border border-border bg-bg-secondary p-6 md:p-8",
           "transition-all duration-300 ease-out",
           "hover:bg-bg-hover hover:border-border-hover hover:-translate-y-1",
         )}
@@ -77,96 +77,109 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.15 + index * 0.1, ease: "easeOut" }}
       >
-        {/* Status + Project number */}
-        <div className="flex items-center justify-between mb-5">
-        <span
-          className={cn(
-            "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium",
-            statusColors[project.status],
-          )}
+        <a
+          href={getPath(`/project/${project.slug}`)}
+          aria-label={`查看 ${project.name} 完整案例`}
+          className="absolute inset-0 z-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
         >
-          <span
-            className={cn(
-              "w-1.5 h-1.5 rounded-full",
-              project.status === "completed" && "bg-emerald-400",
-              project.status === "iterating" && "bg-amber-400 animate-pulse",
-              project.status === "planned" && "bg-text-tertiary",
-            )}
-          />
-          {project.statusLabel}
-        </span>
-        {project.number && (
-          <span className="text-[11px] font-mono text-text-tertiary">
-            #{String(project.number).padStart(2, "0")}
-          </span>
-        )}
-      </div>
+          <span className="sr-only">查看 {project.name} 完整案例</span>
+        </a>
 
-      {/* Icon + Project name — prominent identity */}
-      <a href={getPath(`/project/${project.slug}`)} className="flex items-center gap-3 mb-4">
-        <span className="text-3xl shrink-0">{project.coverIcon}</span>
-        <h3 className="text-xl md:text-2xl font-semibold text-text-primary group-hover:text-brand-light transition-colors leading-tight">
-          {project.name}
-          <span className="ml-2 text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity text-lg">
-            →
-          </span>
-        </h3>
-      </a>
-
-      {/* Conflict — the hook */}
-      <p className="text-sm text-text-secondary leading-relaxed mb-2">
-        <span className="text-text-primary font-medium">问题：</span>
-        {project.conflict}
-      </p>
-
-      {/* Motivation */}
-      <p className="text-sm text-text-secondary leading-relaxed mb-4">
-        <span className="text-text-primary font-medium">我的回应：</span>
-        {project.motivation}
-      </p>
-
-      {/* Role */}
-      <p className="text-xs text-text-tertiary mb-3">{project.role}</p>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {project.tags.map((tag) => (
-          <Badge key={tag} variant="brand" size="sm">
-            {tag}
-          </Badge>
-        ))}
-      </div>
-
-      {/* Period + Result */}
-      <div className="pt-3 border-t border-border">
-        <p className="text-xs text-text-tertiary mb-1">
-          {formatDateRange(project.period.start, project.period.end)}
-        </p>
-        {project.result && (
-          <p className="text-xs text-text-secondary font-medium">
-            {project.result}
-          </p>
-        )}
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a
-            href={getPath(`/project/${project.slug}`)}
-            className="inline-flex items-center rounded-md border border-border px-3 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary"
-          >
-            查看详情
-          </a>
-          {project.resources?.map((resource) => (
-            <a
-              key={resource.href}
-              href={getPath(resource.href)}
-              target={resource.type === "manual" ? "_blank" : undefined}
-              rel={resource.type === "manual" ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center rounded-md bg-brand px-3 py-1.5 text-xs font-medium text-white transition hover:brightness-110"
+        <div className="relative z-10 pointer-events-none">
+          {/* Status + Project number */}
+          <div className="flex items-center justify-between mb-5">
+            <span
+              className={cn(
+                "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium",
+                statusColors[project.status],
+              )}
             >
-              {resource.label}
-            </a>
-          ))}
+              <span
+                className={cn(
+                  "w-1.5 h-1.5 rounded-full",
+                  project.status === "completed" && "bg-emerald-400",
+                  project.status === "iterating" && "bg-amber-400 animate-pulse",
+                  project.status === "planned" && "bg-text-tertiary",
+                )}
+              />
+              {project.statusLabel}
+            </span>
+            {project.number && (
+              <span className="text-[11px] font-mono text-text-tertiary">
+                #{String(project.number).padStart(2, "0")}
+              </span>
+            )}
+          </div>
+
+          {/* Icon + Project name — prominent identity */}
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-3xl shrink-0">{project.coverIcon}</span>
+            <h3 className="text-xl md:text-2xl font-semibold text-text-primary group-hover:text-brand-light transition-colors leading-tight">
+              {project.name}
+              <span
+                className="ml-2 text-text-tertiary opacity-60 group-hover:opacity-100 transition-opacity text-lg"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </h3>
+          </div>
+
+          {/* Conflict — the hook */}
+          <p className="text-sm text-text-secondary leading-relaxed mb-2">
+            <span className="text-text-primary font-medium">问题：</span>
+            {project.conflict}
+          </p>
+
+          {/* Motivation */}
+          <p className="text-sm text-text-secondary leading-relaxed mb-4">
+            <span className="text-text-primary font-medium">我的回应：</span>
+            {project.motivation}
+          </p>
+
+          {/* Role */}
+          <p className="text-xs text-text-tertiary mb-3">{project.role}</p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {project.tags.map((tag) => (
+              <Badge key={tag} variant="brand" size="sm">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+
+          {/* Period + Result */}
+          <div className="pt-3 border-t border-border">
+            <p className="text-xs text-text-tertiary mb-1">
+              {formatDateRange(project.period.start, project.period.end)}
+            </p>
+            {project.result && (
+              <p className="text-xs text-text-secondary font-medium">
+                {project.result}
+              </p>
+            )}
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-light transition-colors group-hover:text-white">
+                点击卡片查看完整案例
+                <span aria-hidden="true">↗</span>
+              </span>
+              <div className="relative z-20 flex flex-wrap gap-2 pointer-events-auto">
+                {project.resources?.map((resource) => (
+                  <a
+                    key={resource.href}
+                    href={getPath(resource.href)}
+                    target={resource.type === "manual" ? "_blank" : undefined}
+                    rel={resource.type === "manual" ? "noopener noreferrer" : undefined}
+                    className="inline-flex items-center rounded-md bg-brand px-3 py-1.5 text-xs font-medium text-white transition hover:brightness-110"
+                  >
+                    {resource.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </motion.article>
     </div>
   );
