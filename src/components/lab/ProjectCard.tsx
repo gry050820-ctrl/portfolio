@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { ArrowUpRight, MousePointerClick } from "lucide-react";
 import { cn, formatDateRange, getPath } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 
@@ -69,9 +70,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     <div ref={ref}>
       <motion.article
         className={cn(
-          "group relative block cursor-pointer rounded-lg border border-border bg-bg-secondary p-6 md:p-8",
+          "group relative block cursor-pointer overflow-hidden rounded-lg border border-border bg-bg-secondary p-6 md:p-8",
           "transition-all duration-300 ease-out",
-          "hover:bg-bg-hover hover:border-border-hover hover:-translate-y-1",
+          "hover:bg-bg-hover hover:border-border-active hover:-translate-y-1 hover:shadow-glow",
         )}
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -160,9 +161,16 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               </p>
             )}
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-light transition-colors group-hover:text-white">
-                点击卡片查看完整案例
-                <span aria-hidden="true">↗</span>
+              <span className="project-card-cta relative inline-flex min-h-10 items-center gap-2 overflow-hidden rounded-md border border-brand/40 bg-brand-muted px-3 py-2 text-xs font-semibold text-white shadow-[0_0_18px_rgba(108,92,231,0.12)] transition-all duration-300 group-hover:border-brand-light group-hover:bg-brand/25 group-hover:shadow-[0_0_24px_rgba(108,92,231,0.28)]">
+                <MousePointerClick
+                  className="relative z-10 size-4 shrink-0 text-brand-light"
+                  aria-hidden="true"
+                />
+                <span className="relative z-10">点击卡片 · 查看完整案例</span>
+                <ArrowUpRight
+                  className="project-card-cta-icon relative z-10 size-4 shrink-0 text-brand-light"
+                  aria-hidden="true"
+                />
               </span>
               <div className="relative z-20 flex flex-wrap gap-2 pointer-events-auto">
                 {project.resources?.map((resource) => (

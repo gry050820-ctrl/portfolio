@@ -131,3 +131,35 @@ body {
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
+
+/* Project card action affordance */
+@keyframes project-cta-scan {
+  0%, 55% { transform: translateX(-140%); }
+  85%, 100% { transform: translateX(240%); }
+}
+
+@keyframes project-cta-nudge {
+  0%, 70%, 100% { transform: translate(0, 0); }
+  82% { transform: translate(2px, -2px); }
+}
+
+.project-card-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 38%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  animation: project-cta-scan 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.project-card-cta-icon {
+  animation: project-cta-nudge 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card-cta::before,
+  .project-card-cta-icon {
+    animation: none;
+  }
+}
