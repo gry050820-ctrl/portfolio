@@ -6,6 +6,7 @@ import { formatDateRange, getPath } from "@/lib/utils";
 import { ProjectDetailNav } from "./ProjectDetailNav";
 import { ProjectCrossLinks } from "./ProjectCrossLinks";
 import { ProjectResources } from "./ProjectResources";
+import { ContextOSDemo } from "@/components/context-os/ContextOSDemo";
 
 export function generateStaticParams() {
   return getAllProjectSlugs().map((slug) => ({ slug }));
@@ -79,6 +80,14 @@ export default async function ProjectPage({
       </section>
 
       <div className="border-t border-border" />
+
+      {project.slug === "personal-context-os" && (
+        <section className="py-10 md:py-14">
+          <div className="mx-auto w-full max-w-[1180px] px-4 sm:px-6 lg:px-10">
+            <ContextOSDemo />
+          </div>
+        </section>
+      )}
 
       {project.resources && project.resources.length > 0 && (
         <section className="py-10 md:py-12">

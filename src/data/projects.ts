@@ -238,12 +238,11 @@ export const projects: ProjectDetail[] = [
       "对小白用户来说，最难的不是'学不会'，而是'连开始都开始不了'。降低门槛不是'做简单一点'，而是站在用户的角度，把每一步设计到他们不需要思考就能完成。这需要的不是技术能力，是同理心。",
 
     relatedByCapability: [
-      { label: "需求洞察 · 实习项目", slug: "internship" },
-      { label: "需求洞察 · 毕业设计", slug: "thesis" },
+      { label: "信息架构 · Personal Context OS", slug: "personal-context-os" },
     ],
     relatedByPractice: [
       { label: "AI Agent · 视频流水线", slug: "video-pipeline" },
-      { label: "自动化 · Claude Code 实践", slug: "claude-code" },
+      { label: "AI 搜索 · GEO 工作台", slug: "geo-analyst-workspace" },
     ],
   },
   {
@@ -379,8 +378,8 @@ export const projects: ProjectDetail[] = [
     ],
     takeaway: "一个可信的 GEO 项目，既要展示可重复的增长信号，也要主动说明未命中场景和归因边界。",
     relatedByCapability: [
-      { label: "AI 实践 / Claude Code 自动化", slug: "claude-code" },
-      { label: "执行落地 / AI 产品运营", slug: "internship" },
+      { label: "信息架构 / Personal Context OS", slug: "personal-context-os" },
+      { label: "产品包装 / AI U 盘", slug: "ai-usb" },
     ],
     relatedByPractice: [
       { label: "自动化工作流 / 视频流水线", slug: "video-pipeline" },
@@ -389,7 +388,7 @@ export const projects: ProjectDetail[] = [
   },
   {
     slug: "video-pipeline",
-    number: 2,
+    number: 3,
     name: "AI 视频工厂",
     tagline: "把一次性的视频处理，重构成可审核、可恢复、可复用的内容生产系统",
     status: "iterating",
@@ -451,8 +450,73 @@ export const projects: ProjectDetail[] = [
     },
     resources: [{ label: "观看项目成片", href: "/projects/ai-video/final.mp4", type: "video" }],
     takeaway: "把 AI 生成能力变成真正可交付的内容系统，关键不在于少写几个命令，而在于建立可信的时间线、审核点和产物链。",
-    relatedByCapability: [{ label: "AI 实践 · Agent 编排", slug: "claude-code" }, { label: "执行落地 · 完整交付", slug: "ai-usb" }],
-    relatedByPractice: [{ label: "AI U 盘 · 一键部署", slug: "ai-usb" }, { label: "Claude Code · 自动化实践", slug: "claude-code" }],
+    relatedByCapability: [{ label: "信息架构 · Personal Context OS", slug: "personal-context-os" }, { label: "执行落地 · AI U 盘", slug: "ai-usb" }],
+    relatedByPractice: [{ label: "AI U 盘 · 一键部署", slug: "ai-usb" }, { label: "GEO · 可复测工作流", slug: "geo-analyst-workspace" }],
+  },
+  {
+    slug: "personal-context-os",
+    number: 4,
+    name: "Personal Context OS",
+    tagline: "让 AI 在跨项目协作中记得来路，也知道什么不该自作主张",
+    status: "iterating",
+    statusLabel: "持续迭代",
+    role: "产品设计 · 信息架构 · AI 工作流",
+    period: { start: "2026-07" },
+    tools: ["Obsidian", "Markdown", "Codex", "Next.js", "Framer Motion"],
+    background: {
+      context: "AI 可以高效完成当前任务，但新对话往往意味着重新建立上下文。长期目标、项目决策和做事方式散落在不同会话中，难以被稳定调用。",
+      userProblem: "用户需要反复解释自己是谁、正在做什么、之前为什么这样决策；而简单的自动记忆又会引入错误画像、过时信息和隐私风险。",
+      whyExistingSolutionsFail: "传统笔记工具优于保存，却不会在正确的任务中主动召回；只做向量检索又无法充分区分原始证据、确认事实和 AI 推测。",
+    },
+    opportunity: {
+      whyWorthDoing: "当 AI 从单次问答变成长期协作者，上下文本身就成为一层需要设计、治理和审计的产品基础设施。",
+      whyNow: "AI Agent 已经能执行跨文件和跨工具任务，但长期上下文仍普遍依赖用户手动重述，记忆的可信性与可控性成为新瓶颈。",
+      myJudgment: "不追求记住一切，而是先建立证据、置信度和生命周期。只有可追溯、可修正、可归档的记忆，才值得被 AI 在新任务中使用。",
+    },
+    thinking: {
+      directions: ["方案 A：把所有对话做全量语义检索", "方案 B：用 Raw Source、Wiki 和 Schema 分层，建立带证据和置信度的上下文治理流程"],
+      chosenDirection: "方案 B",
+      keyDecisions: [
+        { point: "为什么不记住全部对话？", detail: "全量保留会放大噪声、矛盾和隐私风险。系统只捕获有长期价值的事实、决策和可复用方法。" },
+        { point: "为什么需要人工可控？", detail: "AI 可以分类和建议，但低置信推测、敏感画像和实质删除必须留给用户复核。" },
+      ],
+    },
+    execution: {
+      mvp: "对话结束时自动识别长期价值，先写入 Inbox；经 Daily Triage 合并到正式知识；新任务通过 Query-first 召回相关决策；项目结束用 Digest 将经验回流。",
+      aiAcceleration: "Codex 负责检索、分类、去重和结构化草稿；Obsidian 和 Markdown 提供本地可读、可迁移的知识层；自动任务执行日常整理与周期质检。",
+      milestones: ["建立 Raw Source / Wiki / Schema 三层模型", "跑通 Memory Capture 和 Query-first", "增加 Daily Triage 与 Weekly Lint", "用 Project Digest 连接 GEO、SEO 和作品集经验"],
+    },
+    tradeoffs: [
+      { decision: "自动化程度", optionA: "AI 直接改写正式知识", optionB: "新内容先进 Inbox，再经整理合并", chosen: "B", reason: "牺牲一点即时性，换取来源、去重和人工复核边界。" },
+      { decision: "数据形态", optionA: "封闭云端数据库", optionB: "本地 Markdown + Obsidian 双链", chosen: "B", reason: "用户能直接阅读、版本化和迁移数据，不被单一工具锁定。" },
+    ],
+    aiPractice: {
+      toolsUsed: [
+        { name: "Codex", purpose: "Query-first 检索、Memory Capture 和知识治理" },
+        { name: "Obsidian", purpose: "Markdown 知识库、Wiki 双链与人工查看" },
+        { name: "AGENTS.md", purpose: "定义上下文读写、置信度和安全边界" },
+        { name: "Automations", purpose: "运行 Daily Triage 和 Weekly Lint" },
+      ],
+      aiContribution: "AI 负责从原始材料中识别候选知识、检索旧页、建议合并方向，并在新任务中召回相关上下文。",
+      myContribution: "我负责定义什么值得被记住、证据和推测的边界、信息架构、自动化权限以及最终的取舍决策。",
+    },
+    impact: {
+      quantitative: ["42 个 Markdown 页面组成可追溯知识库快照", "已运行 Memory Capture、Daily Triage 和 Weekly Lint", "GEO、SEO、AI U 盘和作品集经验已进入跨项目回流"],
+      longTerm: "系统将单次 AI 对话转变为可积累的个人上下文，同时用来源、置信度和归档机制控制自动记忆的风险。",
+    },
+    reflection: {
+      didWell: ["没有把记忆简化为全量检索", "将原始来源、正式知识和系统规则分层", "对推测、隐私和删除保留人工控制"],
+      couldImprove: ["当前知识规模还小，长期召回准确率尚未建立稳定量化指标", "跨设备同步与本机运行时存在边界", "自动化结果还需要更清晰的审批与回滚界面"],
+      biggestLesson: "AI 记忆的价值不是记得多，而是在正确的时候调用正确的证据，并允许用户知道它为什么被记住。",
+    },
+    nextIteration: {
+      whatWouldChange: "建立一组固定的历史问题和召回结果，开始测量召回准确率、重复率和错误画像修正时间。",
+      pitfallsToAvoid: "不用页面数量代替产品价值，不将 AI 推测冒充用户事实，不在没有审计记录时静默覆盖或删除知识。",
+      nextExploration: "增加可视化审核台、上下文召回测试集和跨设备同步健康检查。",
+    },
+    takeaway: "真正可信的 AI 记忆，不是记住一切，而是让每一条被召回的上下文都有来路、有边界、也能被修正。",
+    relatedByCapability: [{ label: "AI 评估 · GEO Analyst Workspace", slug: "geo-analyst-workspace" }, { label: "产品设计 · AI U 盘", slug: "ai-usb" }],
+    relatedByPractice: [{ label: "工作流编排 · AI 视频工厂", slug: "video-pipeline" }, { label: "可复测实践 · GEO", slug: "geo-analyst-workspace" }],
   },
 ];
 
